@@ -1,0 +1,93 @@
+.nav-tabs{
+    &.nav-tabs-custom{
+        border: none;
+
+        .nav-item{
+            flex: 1;
+            // max-width: 255px;
+
+            & + .nav-item{
+                .nav-link{
+                    border-left: 0px;
+                }
+            }
+
+            &:first-child{
+                .nav-link{
+                    border-top-left-radius: 13px;
+                    border-bottom-left-radius: 13px;
+                    @media screen and (max-width: 1679px){
+                        border-top-left-radius: 8px;
+                        border-bottom-left-radius: 8px;
+                    }
+                }
+            }
+            &:last-child{
+                .nav-link{
+                    border-top-right-radius: 13px;
+                    border-bottom-right-radius: 13px;
+                    @media screen and (max-width: 1679px){
+                        border-top-right-radius: 8px;
+                        border-bottom-right-radius: 8px;
+                    }
+                }
+            }
+        }
+        .nav-link{
+            border-radius: 0px;
+            border: 1px solid #DDDDDD;
+            background: rgb(255,255,255);
+            background: linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(246,255,244,1) 100%);
+            padding: 18px 20px;
+            font-size: 15px;
+            width: 100%;
+            font-weight: bold;
+            color: #414141;
+            position: relative;
+            overflow: hidden;
+            &:after{
+                content: '';
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                height: 0px;
+                transition: all ease-in-out 0.2s;
+            }
+            &.active{
+                &:after{
+                    background-color: #309119;
+                    height: 5px;
+                    @media screen and (max-width: 991px){
+                        height: 2px; 
+                    }
+                }
+            }
+            @media screen and (max-width: 1679px){
+                padding: 12px 16px;
+                font-size: 12px;
+            }
+            @media screen and (max-width: 991px){
+                padding: 12px 5px;
+                
+            }
+        }
+
+    }
+}
+
+.tab-content-custom{
+    margin-top: 15px;
+    margin-bottom: 45px;
+    .tab-pane{
+      padding: 50px 30px ;
+      font-size: 18px;
+      background-color: #F9F9F9;
+      border: 1px solid #D5D5D5;
+      border-radius: 11px;
+      @media screen and (max-width: 1679px){
+        padding: 30px 15px;
+        font-size: 14px;
+      }  
+    }
+}

@@ -1,0 +1,100 @@
+.pagenation-wrap{
+    display: flex;
+    align-items: center;
+    margin-top: 30px;
+    padding-bottom: 80px;
+    padding-top: 20px;
+    margin-top: auto;
+    @media screen and (max-width: 1679px){
+        padding-bottom: 50px;
+    }
+    @media screen and (max-width: 1200px){
+        justify-content: center;
+        padding-bottom: 30px;
+    }
+    @media screen and (max-width: 992px){
+        flex-wrap: wrap;
+    }
+    nav{
+        margin-left: auto;
+        @media screen and (max-width: 1200px){
+            margin-left: 0;
+            justify-content: center;
+        }
+        @media screen and (max-width: 992px){
+            flex: 0 0 100%;
+            max-width: 100%;
+            display: flex;
+
+        }
+    }
+
+    .page-number{
+        display: flex;
+        align-items: center;
+        margin-left: 10px;
+        @media screen and (max-width: 1441px){
+            font-size: 12px;
+        }
+        @media screen and (max-width: 992px){
+            margin-left: 0;
+            margin-top: 20px;
+        }
+        span{
+            padding-left: 5px;
+            padding-right: 5px;
+            &.currentpage{
+                border: 1px solid #707070;
+                margin-right: 15px;
+                border-radius: 17px;
+                padding: 5px 26px;
+                @media screen and (max-width: 1441px){
+                    margin-right: 10px;
+                    padding: 5px 15px;
+                    border-radius: 10px;
+                }
+            }
+        }
+    }
+
+    .pagination{
+        margin-bottom: 0;
+    }
+    
+    .page-item{
+        align-self: stretch;
+        & +  .page-item{
+            margin-left: 8px;
+            @media screen and (max-width: 600px){
+                margin-left: 0;
+            }
+        }
+        &.active{
+            .page-link{
+                background-color: #258809;
+            } 
+        }
+    }
+    .page-link{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+        border: none;
+        border-radius: 10px;
+        padding: 11px 10px;
+        color: $green-secondary;
+        font-size: 15px;
+        @media screen and (max-width: 1441px){
+            font-size: 11px;
+            border-radius: 8px;
+            padding: 8px 10px;
+        }
+        img{
+            width: 7.2px;
+            @media screen and (max-width: 1441px){
+                width: 5px;
+            }
+        }
+    }
+}

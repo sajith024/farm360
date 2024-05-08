@@ -1,0 +1,163 @@
+.sidebar{
+    position: fixed;
+    top: 87px;
+    bottom: 0;
+    background-color: #F1FAF6;
+    width: 391px;
+    padding-right: 28px;
+    display: flex;
+    flex-direction: column;
+    z-index: 9;
+    overflow-y: auto;
+    transition: all ease-in-out 0.3s;
+    transform: translateX(-100%);
+    &.sidebar-show{
+        @media screen and (max-width: 992px){
+            transform: translateX(0);
+        }
+    }
+    &.sidebar-show-lg{
+        @media screen and (min-width: 993px){
+            transform: translateX(0);
+        }
+    }
+    @media screen and (max-width: 1679px){
+        width: 300px;
+        padding-right: 16px;
+        top: 75px;
+    }
+    @media screen and (max-width: 1441px){
+        width: 240px;
+        padding-right:10px;
+        top: 60px;
+    }
+    @media screen and (max-width: 768px){
+        top: 100px;
+        // padding-bottom: 50px; /* IOS - iphone floating action button overlap*/
+    }
+    @media screen and (max-width: 640px){
+        top: 44px;
+        z-index: 999;
+        width: 100%;
+    }
+    
+    .nav{
+        display: flex;
+        flex-direction: column;
+        
+        a{
+            padding: 16px 30px;
+            display: inline-flex;
+            align-items: center;
+            width: 100%;
+            text-decoration: none;
+            border-radius: 0px 60px 60px 0px;
+            color: #0A4B0F;
+            font-weight: 400;
+            font-size: 18px;
+            letter-spacing: -0.6px;
+            padding-right: 5px;
+            @media screen and (max-width: 1679px){
+                padding: 16px 20px;
+                font-size: 14px;
+            }
+            @media screen and (max-width: 1441px){
+                padding: 16px;
+                font-size: 12px;
+            }
+            
+        }
+
+        & > li{
+            margin-bottom: 10px;
+            position: relative;
+            &.active,
+            &.page-active,
+            &:hover{
+                & > a{
+                    background-color: $green-alt;
+                    color: #fff;
+                }
+                img{
+                    filter: brightness(0) invert(1);
+                }
+            }
+
+            .submenu-toggle{
+                position: absolute;
+                right: 20px;
+                top: 0;
+                height: 53px;
+                width: 40px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                border: none;
+                background: transparent;
+                img{
+                    width: 10px;
+                    object-fit: contain;
+                    transition: all ease-in-out 0.3s;
+                    transform: rotate(-90deg);
+                }
+                &.opened{
+                    img{
+                        transform: rotate(0);
+                    }
+                    
+                }
+            }
+            .subnav{
+                display: none;
+                list-style: none;
+                li{
+                    &.active{
+                        a{
+                            &:before{
+                                content: '';
+                                display: inline-block;
+                                width: 2px;
+                                height: 18px;
+                                margin-right: 5px;
+                                background-color: #0A4B0F;
+                            }
+                        }
+                    }
+                }
+            }
+            
+        }
+
+        .menu-icon{
+            img{
+                width: 20px;
+                margin-right: 18px;
+                @media screen and (max-width: 1679px){
+                    margin-right: 12px;
+                    width: 16px;
+                }
+            }
+        }
+
+        &.nav-sidebar{
+            margin-top: 30px;
+        }
+        &.nav-account-actions{
+            margin-top: auto;
+            margin-bottom: 90px;
+            @media screen and (max-width: 1441px){
+                margin-bottom: 60px;
+            }
+            @media screen and (max-width: 768px){
+                margin-bottom: 40px;
+            }
+        }
+    }
+}
+.mCSB_inside > .mCSB_container{
+    margin-right: 0;
+}
+.mCSB_scrollTools .mCSB_draggerContainer{
+    right: -16px;
+    opacity: 0.5;
+}

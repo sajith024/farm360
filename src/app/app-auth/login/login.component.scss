@@ -1,0 +1,231 @@
+@import "../../../assets/styles/scss/variables";
+
+.login-wrap{
+    min-height: 100vh;
+    .row{
+        &.login-row{
+            min-height: 100vh;
+
+            @media screen and (max-width: 992px){
+                flex-wrap: wrap-reverse;
+            }
+        }
+    }
+
+    .form-col{
+        flex-direction: column;
+        flex: 0 0 41.04%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        max-height: 100vh;
+        @media screen and (max-width: 1439px){
+            padding-left: 60px;
+            padding-right: 60px;
+            flex: 0 0 50%;
+        }
+        @media screen and (max-width: 992px){
+            flex: 0 0 100%;
+            
+        }
+        @media screen and (max-width: 767px){
+            padding-left: 40px;
+            padding-right: 40px;
+        }
+        
+        input, button{
+            font-size: 20px;
+            padding-left: 82px;
+            padding-right: 82px;
+            @media screen and (max-width: 1679px){
+                font-size: 16px;
+            }
+            @media screen and (max-width: 1441px){
+                font-size: 14px;
+            }
+            
+            @media screen and (max-width: 767px){
+                padding: 15px 50px;
+            }
+        }
+        .form-group{
+            margin-bottom: 30px;
+            @media screen and (max-width: 1679px){
+                margin-bottom: 20px;
+            }
+            @media screen and (max-width: 1441px){
+                margin-bottom: 15px;
+            }
+        }
+        input[type=email]{
+            background: url("../../../assets/img/icon-email.svg") no-repeat left 36px center ;
+            background-size: 20px;
+            @media screen and (max-width: 1679px){
+                background-size: 14px;
+            }
+            @media screen and (max-width: 767px){
+                background-position: left 20px center;
+            }
+        }
+        input[type=password], input.password{
+            background: #F5F6F8 url("../../../assets/img/icon-lock.svg") no-repeat left 36px center ;
+            background-size: 20px;
+            @media screen and (max-width: 1679px){
+                background-size: 14px;
+            }
+            @media screen and (max-width: 767px){
+                background-position: left 20px center;
+            }
+            &:focus{
+                background-color: #ffffff;
+            }
+        }
+    }
+
+    .intro-col{
+        background-color: $bg-lightblue;
+        background-image: url("../../../assets/img/login-img.svg");
+        background-position: bottom -40px center;
+        background-repeat: no-repeat;
+        background-size: 106%;
+        padding-left: 110px;
+        padding-right: 110px;
+        @media screen and (max-width: 992px){
+            padding: 60px;
+            display: none;
+        }
+        display: flex;
+        .quote{
+            font-size: 27px;
+            color: #7D91A8;
+            font-weight: bold;
+            max-width: 560px;
+            margin-top: auto;
+            margin-bottom: auto;
+            min-height: 694px;
+            @media screen and (max-width: 1679px){
+                min-height: 534px;
+                font-size: 20px;
+            }
+            @media screen and (max-width: 1441px){
+                min-height: 420px;
+                font-size: 18px;
+            }
+            .quote-user{
+                font-size: 18px;
+                font-weight: 400;
+                display: flex;
+                width: 100%;
+                margin-top: 20px;
+                @media screen and (max-width: 1679px){
+                    font-size: 16px;
+                }
+                @media screen and (max-width: 1441px){
+                    font-size: 12px;
+                }
+            }
+        }
+    }
+    .login-form-wrap .form-error ul{margin-bottom: 0;}
+    .login-form-wrap .form-error{
+        position: absolute;
+        bottom: -2px;
+    }
+    .login-form-wrap .form-group{
+        padding-bottom: 15px;
+    }
+    .login-form-wrap{
+        width: 100%;
+        max-width: 520px;
+        margin-top: auto;
+        padding-top: 30px;
+        padding-bottom: 30px;
+        @media screen and (max-width: 1679px){
+            max-width: 440px;
+        }
+        @media screen and (max-width: 1441px){
+            padding-top: 15px;
+            padding-bottom: 15px;
+            max-width: 360px;
+        }
+        .form-error{
+            ul{
+                margin-bottom: 0;
+            }
+        }
+        .form-group{
+            position: relative;
+        }
+        .password-toggle{
+            position: absolute;
+            right: 40px;
+            top: 50%;
+            transform: translateY(calc(-50% - 7px));
+            @media screen and (max-width: 1679px){
+                right: 30px;
+            }
+            .btn-pwd-toggle{
+                padding: 0;
+                img{
+                    width: 26px;
+                    @media screen and (max-width: 1679px){
+                        width: 20px;
+                    }
+                }
+            }
+        }
+
+        .btn-success{
+            background-color: $green-alt;
+            border-color: $green-alt;
+            &:hover{
+                background-color: $green-primary;
+                border-color: $green-primary;
+            }
+        }
+    }
+    .logo-wrap{
+        max-width: 200px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        img{
+            max-width: 100%;
+            max-height: 54px;
+            object-fit: contain;
+            margin-left: auto;
+            margin-right: auto;
+            @media screen and (max-width: 768px){
+                max-height: 36px;
+            }
+        }
+        margin-bottom: 3rem;
+        @media screen and (max-width: 1679px){
+            margin-bottom: 15px
+        }
+        @media screen and (max-width: 768px){
+            max-width: 130px;
+        }
+    }
+
+    .login-title{
+        font-size: 37px;
+        @media screen and (max-width: 1679px){
+            font-size: 28px;
+        }
+        @media screen and (max-width: 1441px){
+            font-size: 24px;
+        }
+        @media screen and (max-width: 768px){
+            font-size: 20px;
+        }
+    }
+
+    .terms-wrap{
+        margin-top: auto;
+        margin-bottom: 60px;
+        @media screen and (max-width: 1441px){
+            margin-bottom: 30px;
+        }
+    }
+}

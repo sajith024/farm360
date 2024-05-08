@@ -1,0 +1,22 @@
+
+
+@for $i from 1 through 6 {
+    h#{$i} {
+     font-weight: 600;
+    }
+}
+body{
+    font-size: 16px;
+}
+
+.text-green{
+    color: $green-primary !important;
+}
+
+.text-green-alt{
+    color: $green-alt !important;
+}
+
+.text-green-secondary{
+    color: $green-secondary  !important;
+}
