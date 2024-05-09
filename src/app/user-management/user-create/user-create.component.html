@@ -1,0 +1,150 @@
+<div class="title-main">
+  <div class="title-left">
+    <h2>
+      <button class="btn btn-back" id="button-back">
+        <img src="../../../assets/img/icon-arrow-back.svg" alt="back" />
+      </button>
+      Create User
+    </h2>
+  </div>
+</div>
+
+<div class="content-area">
+  <div class="user-edit-wrap">
+    <form action="#" class="form dashboard-form">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-6 d-flex fg-order-name">
+            <div class="form-group fg-name">
+              <label for="name">Name</label>
+              <input type="text" class="form-control" name="name" id="name" />
+            </div>
+          </div>
+
+          <div class="col-md-6 fg-order-avatar">
+            <div class="form-group">
+              <div class="userimage-blob-wrap">
+                <img src="../../../assets/img/blank.png" alt="avatar" />
+              </div>
+              <input
+                type="file"
+                class="hidden-input"
+                id="avatar"
+                name="avatar"
+                accept="image/png, image/jpeg"
+              />
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="language">Language</label>
+              <select
+                class="form-control"
+                name="language"
+                id="language"
+                required
+              >
+                <option selected disabled>Select Language</option>
+                <option
+                  *ngFor="let language of languages"
+                  value="{{ language.id }}"
+                >
+                  {{ language.name }}
+                </option>
+              </select>
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="country">Country</label>
+              <select class="form-control" name="country" id="country" required>
+                <option selected disabled>Select Country</option>
+                <option
+                  *ngFor="let country of countries"
+                  value="{{ country.id }}"
+                >
+                  {{ country.name }}
+                </option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="phone">Phone Number</label>
+
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <div
+                    class="btn btn-outline phone-dropdown form-control dropdown-toggle d-flex"
+                    type="button"
+                    data-toggle="dropdown"
+                    aria-haspopup="true"
+                    aria-expanded="false"
+                  >
+                    <div class="country flag-icon">
+                      <img
+                        src="../../../assets/img/country-flag.svg"
+                        alt="country"
+                      />
+                    </div>
+                    <div class="country country-code">
+                      <input type="" value="966" />
+                    </div>
+                  </div>
+
+                  <div class="dropdown-menu">
+                    <a class="dropdown-item" href="#">
+                      <div class="flag-icon">
+                        <img
+                          src="../../../assets/img/country-flag.svg"
+                          alt="country"
+                        />
+                      </div>
+                      <span>+91</span>
+                    </a>
+                    <a class="dropdown-item" href="#">Country Name</a>
+                    <a class="dropdown-item" href="#">Country Name</a>
+                    <a class="dropdown-item" href="#">Country Name</a>
+                  </div>
+                </div>
+                <input
+                  type="text"
+                  class="form-control phoneInput"
+                  aria-label="Text input with dropdown button"
+                  name="phone"
+                  id="phone"
+                />
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="email">Email</label>
+              <input
+                type="email"
+                class="form-control"
+                name="email"
+                id="email"
+                required
+              />
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col d-flex">
+            <button class="ms-auto btn btn-form-action">Save</button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

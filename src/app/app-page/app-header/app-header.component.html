@@ -33,27 +33,26 @@
           <div class="count"></div>
         </div>
 
-        <div class="dropdown profile-drop custom-drop">
+        <div ngbDropdown class="profile-drop custom-drop">
           <button
             class="btn btn-secondary dropdown-toggle"
             type="button"
-            id="dropdownMenuButton1"
-            data-bs-toggle="dropdown"
-            aria-expanded="false"
+            ngbDropdownToggle
           >
             <img src="../../../assets/img/drop_down.svg" alt="user" />
           </button>
           <div class="user-profile">
-            <img src="../../../assets/img/user-img.jpg" alt="user" />
+            <img src="{{ profile?.image ?? '' }}" alt="user" />
           </div>
           <div class="name-wrap">
-            <span class="name">Dominic Keller</span>
-            <span class="position">Founder</span>
+            <span class="name">{{
+              profile?.first_name ?? "" + profile?.last_name
+            }}</span>
+            <!-- <span class="position">Founder</span> -->
           </div>
-          <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-            <li><a class="dropdown-item" href="#">Profile</a></li>
-            <li><a class="dropdown-item" href="#" id="dd-logout">Logout</a></li>
-            <li><a class="dropdown-item" href="#">Something else here</a></li>
+          <ul ngbDropdownMenu>
+            <li ngbDropdownItem>Profile</li>
+            <li ngbDropdownItem (click)="logout()">Logout</li>
           </ul>
         </div>
       </div>
