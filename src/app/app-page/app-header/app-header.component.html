@@ -46,7 +46,7 @@
           </div>
           <div class="name-wrap">
             <span class="name">{{
-              profile?.first_name ?? "" + profile?.last_name
+              profile ? profile.first_name + " " + profile.last_name : ""
             }}</span>
             <!-- <span class="position">Founder</span> -->
           </div>

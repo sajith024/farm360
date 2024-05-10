@@ -1,10 +1,10 @@
 <div class="title-main">
   <div class="title-left">
     <h2>
-      <button type="button" class="btn btn-back" id="button-back" routerLink="/users">
+      <button class="btn btn-back" id="button-back" routerLink="/users">
         <img src="../../../assets/img/icon-arrow-back.svg" alt="back" />
       </button>
-      Create User
+      Edit User
     </h2>
   </div>
 </div>
@@ -22,24 +22,44 @@
             <div class="form-group fg-name">
               <label for="name">Name</label>
               <input type="text" class="form-control" formControlName="name" />
+              <!-- <span class="form-error">This field is required</span> -->
             </div>
           </div>
 
           <div class="col-md-6 fg-order-avatar">
-            <input
-              #avatarField
-              type="file"
-              class="hidden-input"
-              accept="image/png, image/jpeg"
-              (change)="onFileSelected($event)"
-            />
-            <div class="userimage-blob-wrap" (click)="avatarField.click()">
-              <img
-                *ngIf="!userImage"
-                src="../../../assets/img/blank.png"
-                alt="avatar"
+            <div class="form-group">
+              <input
+                #avatarField
+                type="file"
+                class="hidden-input"
+                accept="image/png, image/jpeg"
+                (change)="onFileSelected($event)"
               />
-              <img *ngIf="userImage" [src]="userImage" alt="avatar" />
+              <div class="userimage-blob-wrap user-img-shown">
+                <img
+                  *ngIf="!userImage"
+                  src="../../../assets/img/blank.png"
+                  alt="avatar"
+                  (click)="avatarField.click()"
+                />
+                <img
+                  *ngIf="userImage"
+                  [src]="userImage"
+                  alt="avatar"
+                  (click)="avatarField.click()"
+                />
+                <button
+                  type="button"
+                  title="Delete avatar"
+                  class="profile-close"
+                  (click)="clearAvatar(avatarField)"
+                >
+                  ✕
+                </button>
+                <div class="photo-icon-wrap">
+                  <img src="../../../assets/img/photo-icon.svg" alt="icon" />
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -109,24 +129,16 @@
 
         <div class="row">
           <div class="col-md-6">
-            <div class="form-group">
-              <label for="password">Password</label>
+            <label for="password">Password</label>
+            <div class="input-group">
               <input
-                type="password"
+                type="{{ showPassword ? 'text' : 'password' }}"
                 class="form-control"
                 formControlName="password"
               />
-            </div>
-          </div>
-
-          <div class="col-md-6">
-            <div class="form-group">
-              <label for="confirmpassword">Confirm Password</label>
-              <input
-                type="password"
-                class="form-control"
-                formControlName="confirmpassword"
-              />
+              <button type="button" class="btn" (click)="togglePassword()">
+                <img src="../../../assets/img/edit.svg" alt="edit" />
+              </button>
             </div>
           </div>
         </div>

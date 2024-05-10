@@ -1,23 +1,32 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
+import { NgModule } from '@angular/core';
+import { ReactiveFormsModule } from '@angular/forms';
+import { NgbDropdownModule, NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgxPaginationModule } from 'ngx-pagination';
+import { PhoneCodeDropdownComponent } from './phone-code-dropdown/phone-code-dropdown.component';
+import { UserCreateComponent } from './user-create/user-create.component';
+import { UserDeleteComponent } from './user-delete/user-delete.component';
+import { UserEditComponent } from './user-edit/user-edit.component';
+import { UserListComponent } from './user-list/user-list.component';
 import { UserManagementRoutingModule } from './user-management-routing.module';
 import { UserManagementComponent } from './user-management.component';
-import { UserListComponent } from './user-list/user-list.component';
-import { NgxPaginationModule } from 'ngx-pagination';
-import { UserCreateComponent } from './user-create/user-create.component';
-
 
 @NgModule({
   declarations: [
     UserManagementComponent,
     UserListComponent,
-    UserCreateComponent
+    UserCreateComponent,
+    PhoneCodeDropdownComponent,
+    UserEditComponent,
+    UserDeleteComponent,
   ],
   imports: [
     CommonModule,
     NgxPaginationModule,
-    UserManagementRoutingModule
-  ]
+    NgbModalModule,
+    NgbDropdownModule,
+    ReactiveFormsModule,
+    UserManagementRoutingModule,
+  ],
 })
-export class UserManagementModule { }
+export class UserManagementModule {}

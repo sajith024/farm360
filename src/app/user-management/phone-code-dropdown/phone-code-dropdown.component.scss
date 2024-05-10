@@ -1,0 +1,59 @@
+.phone-dropdown {
+  display: flex;
+  align-self: stretch;
+  align-items: center;
+  border-right: none !important;
+  border-top-right-radius: 0px !important;
+  border-bottom-right-radius: 0px !important;
+  padding-right: 5px !important;
+  .country {
+    order: 2;
+
+    &.flag-icon {
+      width: 20px;
+      height: 20px;
+      margin-left: 0px;
+      margin-right: 0px;
+      border-radius: 50%;
+      overflow: hidden;
+      align-self: stretch;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+    }
+
+    &.country-code {
+      span {
+        border: none;
+        outline: none;
+        background-color: transparent;
+        max-width: 40px;
+        text-align: right;
+        font-weight: bold;
+      }
+
+      select {
+        border: none;
+        outline: none;
+        background-color: transparent;
+        padding: 0 20px;
+        background: none !important;
+      }
+    }
+  }
+
+  .dropdown-toggle::after {
+    order: 1;
+    display: none !important;
+  }
+
+  .dropdown-menu {
+    height: 200px;
+    overflow-x: auto;
+  }
+}

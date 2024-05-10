@@ -34,7 +34,7 @@
     </div>
 
     <div class="create-new-wrap">
-      <button class="btn btn-small btn-main">
+      <button class="btn btn-small btn-main" routerLink="create">
         <img
           src="../../../assets/img/add-circle-outline.svg"
           alt="create"
@@ -76,10 +76,20 @@
               role="group"
               aria-label="action buttons"
             >
-              <button type="button" class="btn" id="edit">
+              <button
+                type="button"
+                class="btn"
+                id="edit"
+                routerLink="edit/{{ user.id }}"
+              >
                 <img src="../../../assets/img/edit.svg" alt="edit" />
               </button>
-              <button type="button" class="btn" id="edit">
+              <button
+                type="button"
+                class="btn"
+                id="edit"
+                (click)="deleteUser(user.id)"
+              >
                 <img src="../../../assets/img/delete.svg" alt="delete" />
               </button>
             </div>

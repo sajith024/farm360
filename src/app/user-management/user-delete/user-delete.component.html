@@ -1,0 +1,20 @@
+<div class="modal-header d-block p-0">
+  <button type="button" class="btn-close" (click)="close()">
+    <img src="../../../assets/img/close.png" alt="close" />
+  </button>
+</div>
+<div class="modal-body pb-1">
+  <h4 class="text-center">Are you sure you want to Delete</h4>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-small btn-secondary" (click)="close()">
+    Cancel
+  </button>
+  <button
+    type="button"
+    class="btn btn-small btn-primary"
+    (click)="deleteUser()"
+  >
+    Yes
+  </button>
+</div>

@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { UserService } from '../../service/user-management/user.service';
-import { ToastrService } from 'ngx-toastr';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { PaginationInstance } from 'ngx-pagination';
-
+import { ToastrService } from 'ngx-toastr';
 import { Profile } from '../../model/dashboard/profile';
+import { UserService } from '../../service/user-management/user.service';
+import { UserDeleteComponent } from '../user-delete/user-delete.component';
 
 @Component({
   selector: 'farm360-user-list',
@@ -13,6 +14,7 @@ import { Profile } from '../../model/dashboard/profile';
 export class UserListComponent implements OnInit {
   constructor(
     private toastr: ToastrService,
+    private modalService: NgbModal,
     private userService: UserService
   ) {}
 
@@ -40,8 +42,16 @@ export class UserListComponent implements OnInit {
       },
       error: (err) => {
         console.error(err);
-        this.toastr.error('Retreiving user list failed.');
+        this.toastr.error('Retrieving user list failed.');
       },
+    });
+  }
+
+  deleteUser(id: number): void {
+    this.modalService.open(UserDeleteComponent, {
+      centered: true,
+      size: 'lg',
+      modalDialogClass: 'userlogout',
     });
   }
 }

@@ -1,0 +1,34 @@
+<div class="btn btn-outline phone-dropdown form-control d-flex" ngbDropdown>
+  <ng-container *ngIf="selectedPhoneCode != undefined; else showEmpty">
+    <div ngbDropdownToggle class="country flag-icon">
+      <img src="{{ selectedPhoneCode.flag }}" alt="country" />
+    </div>
+    <div class="country country-code">
+      <input type="text" value="{{ selectedPhoneCode.code }}" readonly />
+    </div>
+  </ng-container>
+  <ng-template #showEmpty>
+    <div ngbDropdownToggle class="country flag-icon">
+      <img src="../../../assets/img/country-flag.svg" alt="country" />
+    </div>
+    <div class="country country-code">
+      <input type="text" value="91" readonly />
+    </div>
+  </ng-template>
+  <div ngbDropdownMenu>
+    <a ngbDropdownItem *ngFor="let phoneCode of phoneCodes; index">
+      <div class="row" (click)="select(phoneCode)">
+        <div class="col">
+          <div class="country flag-icon">
+            <img src="{{ phoneCode.flag }}" alt="country" />
+          </div>
+        </div>
+        <div class="col">
+          <div class="country country-code">
+            <input type="text" value="{{ phoneCode.code }}" readonly />
+          </div>
+        </div>
+      </div>
+    </a>
+  </div>
+</div>

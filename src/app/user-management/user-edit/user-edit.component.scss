@@ -1,0 +1,231 @@
+@import "../../../assets/styles/scss/variables";
+
+.user-thumbnail {
+  width: 45px;
+  height: 45px;
+  object-fit: cover;
+  border: 1px solid transparent;
+  border-radius: 100%;
+  margin-right: 20px;
+}
+
+.userinfo-toggle {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+
+.col-userthumbnail {
+  flex: 0 0 154px;
+  max-width: 154px;
+  padding: 0;
+  @media screen and (max-width: 1679px) {
+    flex: 0 0 100px;
+    max-width: 100px;
+  }
+
+  .img-wrap-userthumbnail {
+    display: flex;
+    align-items: center;
+    width: 120px;
+    height: 120px;
+    border-radius: 100%;
+    @media screen and (max-width: 1679px) {
+      width: 70px;
+      height: 70px;
+    }
+    overflow: hidden;
+    border: 2px solid #ededed;
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+  }
+}
+
+.btn-back {
+  img {
+    @media screen and (max-width: 1679px) {
+      max-width: 20px;
+    }
+    @media screen and (max-width: 1441px) {
+      max-width: 16px;
+    }
+  }
+}
+
+.fg-order-name {
+  @media screen and (max-width: 768px) {
+    order: 1;
+  }
+}
+
+.fg-name {
+  margin-top: auto;
+  flex: 0 0 100%;
+  max-width: 100%;
+  @media screen and (min-width: 769px) {
+    margin-bottom: 50px;
+  }
+}
+.userimage-blob-wrap,
+.staff-blob-wrap {
+  width: 175px;
+  height: 175px;
+  background-color: #f9f9f9;
+  border: 1px solid #d5d5d5;
+  border-radius: 17px;
+  font-size: 10px;
+  display: flex;
+  position: relative;
+  align-items: center;
+  justify-content: center;
+  margin-left: auto;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 30%;
+  cursor: pointer;
+  &.crop-avatar {
+    border-radius: 17px;
+    img {
+      border-radius: 17px;
+    }
+  }
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 17px;
+  }
+  @media screen and (max-width: 1679px) {
+    width: 120px;
+    height: 120px;
+  }
+  @media screen and (max-width: 1441px) {
+    width: 100px;
+    height: 100px;
+  }
+  @media screen and (max-width: 768px) {
+    margin-right: auto;
+  }
+}
+
+.profile-close {
+  position: absolute;
+  top: 0;
+  right: 0;
+  cursor: pointer;
+  border: none;
+  border: 1px solid transparent;
+  color: #212121;
+  border-radius: 50%;
+  transition: all ease-in-out 0.3s;
+  width: 25px;
+  height: 25px;
+  border: none;
+  background: #ffffff;
+  img {
+    width: 80%;
+    object-fit: contain;
+  }
+}
+.profile-close:hover {
+  background: #ffffff;
+}
+
+.pwd-group {
+  position: relative;
+}
+.edit-reenter {
+  display: none;
+}
+.btn-edit-pwd {
+  position: absolute;
+  right: -45px;
+  top: 50%;
+  transform: translateY(-50%);
+  img {
+    width: 24px;
+  }
+}
+
+.photo-icon-wrap {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  z-index: 999;
+  img {
+    width: 48px;
+    height: 48px;
+    object-fit: contain;
+    @media screen and (max-width: 1679px) {
+      width: 40px;
+      height: 40px;
+    }
+    @media screen and (max-width: 1441px) {
+      width: 32px;
+      height: 32px;
+    }
+    @media screen and (max-width: 768px) {
+      width: 28px;
+      height: 28px;
+    }
+  }
+}
+
+.filterby {
+  .modal-title {
+    margin-bottom: 0;
+    padding-bottom: 0;
+    border: none;
+  }
+  .reset-filter {
+    color: #10aa1b;
+    background: transparent;
+    border: none;
+    outline: none;
+  }
+
+  .modal-content {
+    max-width: 520px;
+    padding-bottom: 20px;
+    label {
+      color: #373737;
+      font-size: 13px;
+    }
+    .form-control {
+      border: 2px solid #d9e1e7;
+      background-color: #f1f4f9;
+      max-width: 290px;
+      color: #2d5f88;
+      font-size: 13px;
+      padding: 15px 32px;
+      height: auto;
+      border-radius: 40px;
+      font-size: 13px;
+      padding: 12px 16px;
+      font-size: 12px;
+    }
+    .wrapped-fields {
+      border: none;
+      padding: 0;
+    }
+  }
+}
+
+button.signup-default {
+  border: 0px;
+  outline: none;
+  background-color: transparent;
+  padding: 0;
+  cursor: pointer;
+  img {
+    transition: all ease-in-out 0.3s;
+  }
+  &:hover {
+    img {
+      transform: translateY(-2px);
+    }
+  }
+}
