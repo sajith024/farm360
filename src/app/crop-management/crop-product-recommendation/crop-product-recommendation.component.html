@@ -1,0 +1,36 @@
+<div class="row">
+  <div class="col-lg-4">
+    <div class="form-group">
+      <label for="fertlizers" class="text-green-alt">{{ title }}</label>
+      <input
+        #productInput
+        name="fertlizers"
+        id="fertlizers"
+        type="text"
+        class="form-control"
+        [ngbTypeahead]="search"
+        [inputFormatter]="formatter"
+        [resultFormatter]="formatter"
+        [editable]="false"
+        (selectItem)="addSelected($event)"
+        (keydown.enter)="clearInput(productInput)"
+      />
+    </div>
+  </div>
+  <div class="w-100"></div>
+  <div class="col">
+    <div class="selected-items">
+      <div class="selected-item" *ngFor="let product of getSelected()">
+        <span>{{ product.name }}</span>
+        <button
+          type="button"
+          class="close"
+          aria-label="Close"
+          (click)="removeSelected(product)"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -10,6 +10,7 @@ import { UserEditComponent } from './user-edit/user-edit.component';
 import { UserListComponent } from './user-list/user-list.component';
 import { UserManagementRoutingModule } from './user-management-routing.module';
 import { UserManagementComponent } from './user-management.component';
+import { UserInfoComponent } from './user-info/user-info.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { UserManagementComponent } from './user-management.component';
     PhoneCodeDropdownComponent,
     UserEditComponent,
     UserDeleteComponent,
+    UserInfoComponent,
   ],
   imports: [
     CommonModule,

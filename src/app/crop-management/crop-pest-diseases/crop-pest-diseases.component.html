@@ -1,0 +1,70 @@
+<div class="wrapped-fields-inputs" [formGroup]="pestDiseasesFormGroup">
+  <div class="row">
+    <div class="col-md-6">
+      <div class="form-group">
+        <label for="insectDetails">Insect Details</label>
+        <input
+          type="text"
+          class="form-control"
+          name="insectDetails"
+          id="insectDetails"
+          formControlName="insectDetails"
+        />
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <div class="form-group">
+        <label for="symptoms">Symptoms</label>
+        <textarea
+          name="symptoms"
+          id="symptoms"
+          cols="30"
+          rows="5"
+          class="form-control"
+          formControlName="symptoms"
+        ></textarea>
+      </div>
+    </div>
+  </div>
+
+  <farm360-crop-product-recommendation
+    title="Recommended Product"
+    [products]="pesticides"
+    [productFormArray]="getProductControl()"
+  >
+  </farm360-crop-product-recommendation>
+
+  <div class="row">
+    <div class="col">
+      <div class="form-group">
+        <label for="chemicalControl">Chemical Control</label>
+        <textarea
+          name="chemicalControl"
+          id="chemicalControl"
+          cols="30"
+          rows="5"
+          class="form-control"
+          formControlName="chemicalControl"
+        ></textarea>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col">
+      <div class="form-group">
+        <label for="biologicalControl">Biological Control</label>
+        <textarea
+          name="biologicalControl"
+          id="biologicalControl"
+          cols="30"
+          rows="5"
+          class="form-control"
+          formControlName="biologicalControl"
+        ></textarea>
+      </div>
+    </div>
+  </div>
+</div>

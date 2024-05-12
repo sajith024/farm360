@@ -62,9 +62,9 @@
       <tbody>
         <tr *ngFor="let user of users | paginate : config; index as i">
           <td scope="row">#{{ i + 1 }}</td>
-          <td>
+          <td (click)="viewUserInfo(user)">
             <img src="{{ user.image }}" alt="user" class="user-thumbnail" />
-            {{ user.first_name + user.last_name }}
+            {{ user.first_name + " " + user.last_name }}
           </td>
           <td>{{ user.language }}</td>
           <td>{{ user.country }}</td>
@@ -88,7 +88,7 @@
                 type="button"
                 class="btn"
                 id="edit"
-                (click)="deleteUser(user.id)"
+                (click)="deleteUser(user)"
               >
                 <img src="../../../assets/img/delete.svg" alt="delete" />
               </button>

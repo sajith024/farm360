@@ -1,0 +1,22 @@
+.crop-info-form {
+  .profile-close {
+    background-color: #ffffff;
+    border-color: 1px solid #10aa1b;
+    color: #10aa1b;
+    &:hover {
+      background-color: #10aa1b;
+      border-color: 1px solid #10aa1b;
+      color: #ffffff;
+    }
+  }
+
+  .error_message {
+    color: #f00;
+    font-size: 10px;
+    display: none;
+    position: absolute;
+    &.show {
+      display: block;
+    }
+  }
+}

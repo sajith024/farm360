@@ -1,11 +1,10 @@
-import { Component, OnInit } from "@angular/core";
-import { FormBuilder, FormGroup, FormControl } from "@angular/forms";
-import { ToastrService } from "ngx-toastr";
-import { Country } from "../../model/user-management/country";
-import { Language } from "../../model/user-management/language";
-import { PhoneCode } from "../../model/user-management/phone-code";
-import { UserService } from "../../service/user-management/user.service";
-
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
+import { Country } from '../../model/user-management/country';
+import { Language } from '../../model/user-management/language';
+import { PhoneCode } from '../../model/user-management/phone-code';
+import { UserService } from '../../service/user-management/user.service';
 
 @Component({
   selector: 'farm360-user-create',
@@ -70,7 +69,7 @@ export class UserCreateComponent implements OnInit {
     if (e.target) {
       const target = e.target as HTMLInputElement;
 
-      if (target.files && target.files[0]) {
+      if (target.files) {
         const imageFile = target.files[0];
 
         const fileReader = new FileReader();
@@ -91,6 +90,7 @@ export class UserCreateComponent implements OnInit {
         next: (res) => {
           if (res.statusCode == 201 && res.success) {
             this.userForm.reset();
+            this.userImage = null;
             this.toastr.success('User create successfully.');
           }
         },

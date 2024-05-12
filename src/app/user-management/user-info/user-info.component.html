@@ -1,0 +1,84 @@
+<div class="modal-header">
+  <div class="container-modal-header container-fluid">
+    <div class="row">
+      <div class="col">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col">
+              <h5 class="modal-title" id="userinfoLabel">User Info</h5>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col">
+              <h6>Name :</h6>
+              <p>{{ getName() }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col col-userthumbnail">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col">
+              <div class="img-wrap-userthumbnail">
+                <img
+                  *ngIf="user.image; else emptyImage"
+                  src="{{ user.image }}"
+                  class="info-userthumbnail"
+                  alt="user"
+                />
+                <ng-template #emptyImage>
+                  <img src="../../../assets/img/blank.png" alt="avatar" />
+                </ng-template>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <button type="button" class="btn-close" (click)="close()">
+    <img src="../../../assets/img/close.png" alt="close" />
+  </button>
+</div>
+<div class="modal-body">
+  <div class="container-fluid">
+    <div class="row modal-mb">
+      <div class="col-md-6">
+        <h6>Language :</h6>
+        <p>{{ user.language }}</p>
+      </div>
+      <div class="col-md-6">
+        <h6>Country :</h6>
+        <p>{{ user.country }}</p>
+      </div>
+    </div>
+
+    <div class="row modal-mb">
+      <div class="col-md-6">
+        <h6>Phone Number :</h6>
+        <p>{{ user.phone_number }}</p>
+      </div>
+      <div class="col-md-6">
+        <h6>Email Address</h6>
+        <p>{{ user.email }}</p>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-small btn-primary" (click)="editUser()">
+    Edit Info
+  </button>
+  <button
+    type="button"
+    class="btn btn-small btn-secondary"
+    (click)="deleteUser()"
+  >
+    Delete User
+  </button>
+  <button type="button" class="btn btn-small btn-danger">Block User</button>
+</div>

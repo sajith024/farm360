@@ -5,6 +5,7 @@ import { ToastrService } from 'ngx-toastr';
 import { Profile } from '../../model/dashboard/profile';
 import { UserService } from '../../service/user-management/user.service';
 import { UserDeleteComponent } from '../user-delete/user-delete.component';
+import { UserInfoComponent } from '../user-info/user-info.component';
 
 @Component({
   selector: 'farm360-user-list',
@@ -47,11 +48,23 @@ export class UserListComponent implements OnInit {
     });
   }
 
-  deleteUser(id: number): void {
-    this.modalService.open(UserDeleteComponent, {
+  viewUserInfo(user: Profile): void {
+    const modalRef = this.modalService.open(UserInfoComponent, {
       centered: true,
       size: 'lg',
       modalDialogClass: 'userlogout',
     });
+
+    modalRef.componentInstance.user = user;
+  }
+
+  deleteUser(user: Profile): void {
+    const modalRef = this.modalService.open(UserDeleteComponent, {
+      centered: true,
+      size: 'lg',
+      modalDialogClass: 'userlogout',
+    });
+
+    modalRef.componentInstance.user = user;
   }
 }

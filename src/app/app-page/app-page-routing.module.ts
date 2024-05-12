@@ -19,6 +19,13 @@ const routes: Routes = [
             (m) => m.UserManagementModule
           ),
       },
+      {
+        path: 'crops',
+        loadChildren: () =>
+          import('../crop-management/crop-management.module').then(
+            (m) => m.CropManagementModule
+          ),
+      },
     ],
   },
 ];

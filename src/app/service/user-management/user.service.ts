@@ -105,4 +105,10 @@ export class UserService {
       body
     );
   }
+
+  deleteUser(userId: number): Observable<AppResponse<any>> {
+    return this.httpClient.delete<AppResponse<any>>(
+      `${environment.apiUrl}/api/users/${userId}/`
+    );
+  }
 }
