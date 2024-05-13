@@ -1,10 +1,11 @@
 import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
 import { Observable, tap } from 'rxjs';
+import { environment } from '../../../environments/environment';
 import { AppResponse } from '../../model/app-response';
+import { DashboardStats } from '../../model/dashboard/dashboard-stats';
 import { Profile } from '../../model/dashboard/profile';
 import { LOCAL_STORAGE } from '../local-storage.service';
-import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
@@ -26,5 +27,11 @@ export class DashboardService {
           }
         })
       );
+  }
+
+  getDashboardStats(): Observable<AppResponse<DashboardStats>> {
+    return this.httpClient.get<AppResponse<DashboardStats>>(
+      `${environment.apiUrl}/api/dashboard/stats/`
+    );
   }
 }

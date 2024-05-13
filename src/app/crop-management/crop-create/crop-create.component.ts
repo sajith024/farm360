@@ -138,7 +138,17 @@ export class CropCreateComponent implements OnInit {
 
   saveCrop(): void {
     if (this.cropForm.valid) {
-      console.log(this.cropForm.value);
+      this.cropManagementService.createCrop(this.cropForm.value).subscribe({
+        next: (res) => {
+          if (res.statusCode === 201 && res.success) {
+            this.toastr.success('Crop Created successfully');
+          }
+        },
+        error: (err) => {
+          console.error(err);
+          this.toastr.error('Crop Creation failed');
+        },
+      });
     }
   }
 }

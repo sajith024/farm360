@@ -1,31 +1,31 @@
 <div class="title-main">
-    <div class="title-left">
-      <h2>Dashboard</h2>
-      <h4 class="d-none">Subtitle</h4>
-    </div>
-    <div class="title-right"></div>
+  <div class="title-left">
+    <h2>Dashboard</h2>
+    <h4 class="d-none">Subtitle</h4>
   </div>
+  <div class="title-right"></div>
+</div>
 
-  <div class="content-area">
-    <div class="summary-wrap">
-      <div class="summary summary-bg-green">
-        <div class="summary-info">
-          <div class="summary-title">Total Users</div>
-          <div class="summary-count">2354</div>
-        </div>
-        <div class="summary-icon">
-          <img src="../../../assets/img/total_users.svg" alt="Total" />
-        </div>
+<div class="content-area">
+  <div class="summary-wrap">
+    <div class="summary summary-bg-green">
+      <div class="summary-info">
+        <div class="summary-title">Total Users</div>
+        <div class="summary-count">{{ dashboardStats.total_users }}</div>
       </div>
-
-      <div class="summary summary-bg-orange">
-        <div class="summary-info">
-          <div class="summary-title">Total Crops</div>
-          <div class="summary-count">133</div>
-        </div>
-        <div class="summary-icon">
-          <img src="../../../assets/img/total_crops.svg" alt="Total" />
-        </div>
+      <div class="summary-icon">
+        <img src="../../../assets/img/total_users.svg" alt="Total" />
       </div>
     </div>
+
+    <div class="summary summary-bg-orange">
+      <div class="summary-info">
+        <div class="summary-title">Total Crops</div>
+        <div class="summary-count">{{ dashboardStats.total_crops }}</div>
+      </div>
+      <div class="summary-icon">
+        <img src="../../../assets/img/total_crops.svg" alt="Total" />
+      </div>
+    </div>
   </div>
+</div>
