@@ -4,12 +4,16 @@ export interface Crop {
   id?: number;
   name: string;
   description: string;
-  crop_stages: CropStage[];
   fertilizers: number[];
   fertilizer_provider: Provider;
   crop_seeds: number[];
   crop_seed_provider: Provider;
   pest_diseases: PestDisease[];
+}
+
+export interface CropStages {
+  id: number;
+  crop_stages: CropStage[];
 }
 
 export interface Provider {
@@ -22,6 +26,7 @@ export interface CropStage {
   id?: number;
   stage: string;
   title: string;
+  video: File | null;
   description: string;
 }
 

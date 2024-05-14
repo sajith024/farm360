@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
+import { Observable, combineLatest } from 'rxjs';
+import { AppResponse } from '../../model/app-response';
+import { CropStage, CropStageForm } from '../../model/crop-management/crop';
 import { Fertilizer, Seed } from '../../model/crop-management/crop-product';
 import { CropManagementServiceService } from '../../service/crop-management/crop-management-service.service';
 
@@ -142,6 +145,11 @@ export class CropCreateComponent implements OnInit {
         next: (res) => {
           if (res.statusCode === 201 && res.success) {
             this.toastr.success('Crop Created successfully');
+            const image: File | null = this.cropForm.value.image;
+            if (image) {
+              this.saveCropImage(res.data.id!, image);
+            }
+            this.saveCropStageVideos(res.data.id!, this.cropForm.value.stages);
           }
         },
         error: (err) => {
@@ -150,5 +158,40 @@ export class CropCreateComponent implements OnInit {
         },
       });
     }
+  }
+
+  saveCropStageVideos(cropId: number, stages: CropStageForm[]): void {
+    const cropStagesObservables$: Observable<AppResponse<CropStage>>[] = [];
+
+    stages.forEach((stage) => {
+      cropStagesObservables$.push(
+        this.cropManagementService.saveCropStageVideo(cropId, stage)
+      );
+    });
+
+    combineLatest(cropStagesObservables$).subscribe({
+      next: () => {
+        this.toastr.success('Crop Stage created successfully');
+        this.cropForm.reset();
+      },
+      error: (err) => {
+        console.error(err);
+        this.toastr.error('Crop Stage creation failed');
+      },
+    });
+  }
+
+  saveCropImage(id: number, file: File): void {
+    this.cropManagementService.saveCropImage(id, file).subscribe({
+      next: (res) => {
+        if (res.statusCode === 200 && res.success) {
+          this.toastr.success('Image uploaded successfully');
+        }
+      },
+      error: (err) => {
+        console.error(err);
+        this.toastr.error('Image upload failed');
+      },
+    });
   }
 }

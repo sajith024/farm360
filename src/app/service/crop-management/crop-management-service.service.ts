@@ -12,6 +12,8 @@ import {
   CropForm,
   Crop,
   PestDisease,
+  CropStageForm,
+  CropStage,
 } from '../../model/crop-management/crop';
 
 @Injectable({
@@ -56,7 +58,6 @@ export class CropManagementServiceService {
     const body: Crop = {
       name: value.name,
       description: value.description,
-      crop_stages: value.stages,
       fertilizers: fertilizers,
       fertilizer_provider: {
         name: value.fertilizerProvider.name,
@@ -72,6 +73,30 @@ export class CropManagementServiceService {
     return this.httpClient.post<AppResponse<Crop>>(
       `${environment.apiUrl}/api/crops/crop/`,
       body
+    );
+  }
+
+  saveCropStageVideo(
+    cropId: number,
+    stage: CropStageForm
+  ): Observable<AppResponse<CropStage>> {
+    const form = new FormData();
+    form.append('crop', cropId.toString());
+    Object.entries(stage).forEach(([key, value]) => {
+      form.append(key, value);
+    });
+    return this.httpClient.post<AppResponse<CropStage>>(
+      `${environment.apiUrl}/api/crops/crop/stages/`,
+      form
+    );
+  }
+
+  saveCropImage(id: number, file: File): Observable<AppResponse<any>> {
+    const form = new FormData();
+    form.append('image', file);
+    return this.httpClient.put<AppResponse<any>>(
+      `${environment.apiUrl}/api/crops/crop/${id}/image/`,
+      form
     );
   }
 }
