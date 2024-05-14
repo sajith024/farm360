@@ -11,9 +11,17 @@ export interface Crop {
   pest_diseases: PestDisease[];
 }
 
-export interface CropStages {
-  id: number;
-  crop_stages: CropStage[];
+export interface CropDetail {
+  id?: number;
+  name: string;
+  image: string | null;
+  description: string;
+  fertilizers: Fertilizer[];
+  fertilizer_provider: Provider;
+  crop_seeds: Seed[];
+  crop_seed_provider: Provider;
+  pest_diseases: PestDiseaseDetail[];
+  crop_stages: CropStageDetail[];
 }
 
 export interface Provider {
@@ -30,6 +38,14 @@ export interface CropStage {
   description: string;
 }
 
+export interface CropStageDetail {
+  id?: number;
+  stage: string;
+  title: string;
+  video: string | null;
+  description: string;
+}
+
 export interface PestDisease {
   id?: number;
   insect_name: string;
@@ -39,7 +55,17 @@ export interface PestDisease {
   biological_control: string;
 }
 
+export interface PestDiseaseDetail {
+  id?: number;
+  insect_name: string;
+  symptoms: string;
+  pest_product: Pesticide[];
+  chemical_control: string;
+  biological_control: string;
+}
+
 export interface CropForm {
+  id?: number;
   name: string;
   description: string;
   image: File | null;
@@ -52,11 +78,13 @@ export interface CropForm {
 }
 
 export interface ProviderForm {
+  id?: number;
   name: string;
   contactNumber: string;
 }
 
 export interface CropStageForm {
+  id?: number;
   stage: string;
   video: File | null;
   title: string;
@@ -64,6 +92,7 @@ export interface CropStageForm {
 }
 
 export interface PestDiseasesForm {
+  id?: number;
   insectDetails: string;
   symptoms: string;
   recommendedProducts: Pesticide[];

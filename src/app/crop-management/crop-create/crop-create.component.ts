@@ -149,7 +149,14 @@ export class CropCreateComponent implements OnInit {
             if (image) {
               this.saveCropImage(res.data.id!, image);
             }
-            this.saveCropStageVideos(res.data.id!, this.cropForm.value.stages);
+
+            const stages = this.cropForm.value.stages;
+            if (stages.length !== 0) {
+              this.saveCropStage(res.data.id!, stages);
+            } else {
+              this.cropForm.reset();
+              this.cropImage = null;
+            }
           }
         },
         error: (err) => {
@@ -160,12 +167,12 @@ export class CropCreateComponent implements OnInit {
     }
   }
 
-  saveCropStageVideos(cropId: number, stages: CropStageForm[]): void {
+  saveCropStage(cropId: number, stages: CropStageForm[]): void {
     const cropStagesObservables$: Observable<AppResponse<CropStage>>[] = [];
 
     stages.forEach((stage) => {
       cropStagesObservables$.push(
-        this.cropManagementService.saveCropStageVideo(cropId, stage)
+        this.cropManagementService.createCropStage(cropId, stage)
       );
     });
 
@@ -173,6 +180,7 @@ export class CropCreateComponent implements OnInit {
       next: () => {
         this.toastr.success('Crop Stage created successfully');
         this.cropForm.reset();
+        this.cropImage = null;
       },
       error: (err) => {
         console.error(err);
@@ -182,7 +190,7 @@ export class CropCreateComponent implements OnInit {
   }
 
   saveCropImage(id: number, file: File): void {
-    this.cropManagementService.saveCropImage(id, file).subscribe({
+    this.cropManagementService.updateCropImage(id, file).subscribe({
       next: (res) => {
         if (res.statusCode === 200 && res.success) {
           this.toastr.success('Image uploaded successfully');

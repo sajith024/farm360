@@ -10,6 +10,9 @@ import { CropProductRecommendationComponent } from './crop-product-recommendatio
 import { CropStagingContentComponent } from './crop-staging-content/crop-staging-content.component';
 import { CropPestDiseasesComponent } from './crop-pest-diseases/crop-pest-diseases.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { CropEditComponent } from './crop-edit/crop-edit.component';
+import { NgxPaginationModule } from 'ngx-pagination';
+import { CropDeleteComponent } from './crop-delete/crop-delete.component';
 
 @NgModule({
   declarations: [
@@ -19,9 +22,12 @@ import { ReactiveFormsModule } from '@angular/forms';
     CropStagingContentComponent,
     CropProductRecommendationComponent,
     CropPestDiseasesComponent,
+    CropEditComponent,
+    CropDeleteComponent,
   ],
   imports: [
     CommonModule,
+    NgxPaginationModule,
     NgbAccordionModule,
     NgbTypeaheadModule,
     ReactiveFormsModule,

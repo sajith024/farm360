@@ -1,7 +1,7 @@
 <div class="title-main">
   <div class="title-left">
     <h2>User Management</h2>
-    <h4>Total Number of Users: <span class="font-weight-bold">2344</span></h4>
+    <h4>Total Number of Users: <span class="font-weight-bold">{{config.totalItems}}</span></h4>
   </div>
   <div class="title-right">
     <div class="search-form-wrap">
@@ -60,7 +60,7 @@
       </thead>
 
       <tbody>
-        <tr *ngFor="let user of users | paginate : config; index as i">
+        <tr *ngFor="let user of users | paginate : config; let i = index">
           <td scope="row">#{{ i + 1 }}</td>
           <td (click)="viewUserInfo(user)">
             <img src="{{ user.image }}" alt="user" class="user-thumbnail" />

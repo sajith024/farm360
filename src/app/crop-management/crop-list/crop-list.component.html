@@ -1,1 +1,169 @@
-<p>crop-list works!</p>
+<div class="title-main">
+  <div class="title-left">
+    <h2>Crop Management</h2>
+    <h4>
+      Total No of Crops:
+      <span class="font-weight-bold">{{ config.totalItems }}</span>
+    </h4>
+  </div>
+  <div class="title-right">
+    <div class="search-form-wrap">
+      <form action="#" class="form search-form">
+        <div class="form-group">
+          <input
+            type="text"
+            class="form-control form-control-small"
+            placeholder="search"
+          />
+          <button type="submit" class="btn btn-searchsubmit">
+            <img src="../../../assets/img/search.svg" alt="search" />
+          </button>
+        </div>
+      </form>
+    </div>
+
+    <div class="filter-form-wrap">
+      <form action="#" class="form form-inline">
+        <div class="form-group filter-title">Filter By</div>
+        <div class="form-group">
+          <select
+            name="filterby"
+            id="filterby"
+            class="form-control form-control-small"
+          >
+            <option value="country">Country</option>
+            <option value="country">Name</option>
+          </select>
+        </div>
+      </form>
+    </div>
+
+    <div class="create-new-wrap">
+      <button class="btn btn-small btn-main" routerLink="create">
+        <img
+          src="../../../assets/img/add-circle-outline.svg"
+          alt="create"
+        />Create New Crop
+      </button>
+    </div>
+  </div>
+</div>
+
+<div class="content-area">
+  <div class="table-wrap table-responsive">
+    <table class="table dashboard-table">
+      <thead>
+        <tr>
+          <th scope="col" width="64">S. No</th>
+          <th scope="col">Crop Name</th>
+          <th scope="col" width="96">Image</th>
+          <th scope="col" width="480">Description</th>
+          <th scope="col">Created On</th>
+          <th scope="col" id="actions" width="120"></th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr *ngFor="let crop of crops | paginate : config; let i = index">
+          <td scope="row">#{{ i + 1 }}</td>
+          <td>{{ crop.name }}</td>
+          <td>
+            <img
+              *ngIf="crop.image"
+              src="{{ crop.image }}"
+              alt="{{ crop.name }}"
+              class="crop-image"
+            />
+          </td>
+          <td>
+            <b>{{ crop.description }}</b>
+          </td>
+          <td>{{ crop.created_at | date : "dd MMMM y" }}</td>
+
+          <td>
+            <div
+              class="btn-group btn-actions"
+              role="group"
+              aria-label="action buttons"
+            >
+              <button
+                type="button"
+                class="btn"
+                id="edit"
+                routerLink="edit/{{ crop.id }}"
+              >
+                <img src="../../../assets/img/edit.svg" alt="edit" />
+              </button>
+              <button
+                type="button"
+                class="btn"
+                id="edit"
+                (click)="deleteCrop(crop)"
+              >
+                <img src="../../../assets/img/delete.svg" alt="delete" />
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <pagination-template
+    #p="paginationApi"
+    [id]="config.id!"
+    (pageChange)="config.currentPage = $event"
+  >
+    <div class="pagenation-wrap">
+      <nav aria-label="page Navigation">
+        <ul class="pagination">
+          <li class="page-item" [class.disabled]="p.isFirstPage()">
+            <a class="page-link" title="first">
+              <img src="../../../assets/img/arrow-left.svg" alt=" " />
+              <img src="../../../assets/img/arrow-left.svg" alt=" " />
+            </a>
+          </li>
+          <li class="page-item" [class.disabled]="p.isFirstPage()">
+            <a class="page-link" title="prev" (click)="p.previous()">
+              <img src="../../../assets/img/arrow-left.svg" alt=" " />
+            </a>
+          </li>
+
+          <li
+            *ngFor="let page of p.pages"
+            class="page-item"
+            [class.active]="p.getCurrent() === page.value"
+          >
+            <a
+              (click)="p.setCurrent(page.value)"
+              class="page-link"
+              *ngIf="p.getCurrent() !== page.value"
+            >
+              {{ page.label }}
+            </a>
+            <a *ngIf="p.getCurrent() === page.value" class="page-link">
+              {{ page.label }}
+            </a>
+          </li>
+
+          <li class="page-item" [class.disabled]="p.isLastPage()">
+            <a class="page-link" title="next" (click)="p.next()">
+              <img src="../../../assets/img/arrow-right.svg" alt=" " />
+            </a>
+          </li>
+          <li class="page-item" [class.disabled]="p.isLastPage()">
+            <a class="page-link" title="last">
+              <img src="../../../assets/img/arrow-right.svg" alt=" " />
+              <img src="../../../assets/img/arrow-right.svg" alt=" " />
+            </a>
+          </li>
+        </ul>
+      </nav>
+
+      <div class="page-number">
+        <span class="currentpage">{{ config.currentPage }}</span> of
+        <span class="totalpage">{{ totalPaginationPages }}</span> pages
+      </div>
+    </div>
+  </pagination-template>
+</div>

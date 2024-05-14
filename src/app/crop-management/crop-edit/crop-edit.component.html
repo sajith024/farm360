@@ -1,0 +1,471 @@
+<div class="title-main">
+  <div class="title-left">
+    <h2>
+      <button class="btn btn-back" id="button-back" routerLink="/crops">
+        <img src="../../../assets/img/icon-arrow-back.svg" alt="back" />
+      </button>
+      Edit Crop
+    </h2>
+  </div>
+</div>
+
+<div class="content-area">
+  <div class="user-edit-wrap">
+    <form
+      class="form dashboard-form"
+      [formGroup]="cropForm"
+      (ngSubmit)="saveCrop()"
+    >
+      <div class="container">
+        <div class="row">
+          <div class="col-md-6 d-flex fg-order-name">
+            <div class="form-group fg-name">
+              <label for="cropname">Crop Name</label>
+              <input
+                type="text"
+                class="form-control"
+                name="cropname"
+                id="cropname"
+                formControlName="name"
+              />
+            </div>
+          </div>
+
+          <div class="col-md-6 fg-order-avatar">
+            <div class="form-group">
+              <input
+                type="file"
+                class="hidden-input"
+                id="avatar"
+                name="avatar"
+                #cropAvatar
+                accept="image/*"
+                (change)="onFileSelected($event)"
+              />
+              <div
+                class="userimage-blob-wrap crop-avatar"
+                (click)="cropAvatar.click()"
+              >
+                <img
+                  *ngIf="!cropImage"
+                  src="../../../assets/img/blank.png"
+                  alt="avatar"
+                />
+                <img *ngIf="cropImage" [src]="cropImage" alt="avatar" />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col">
+            <div class="form-group">
+              <label for="description">Description</label>
+              <textarea
+                name="description"
+                id="description"
+                cols="30"
+                rows="5"
+                class="form-control"
+                formControlName="description"
+              ></textarea>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col">
+            <div ngbAccordion id="cropStages">
+              <div ngbAccordionItem>
+                <h6 ngbAccordionHeader id="seedingStage">
+                  <button ngbAccordionButton type="button">
+                    Seeding Stage
+                  </button>
+
+                  <span class="dd-arrow">
+                    <img src="../../../assets/img/dd-arrow.png" alt="open" />
+                  </span>
+                </h6>
+                <div id="collapseOne" ngbAccordionCollapse>
+                  <div ngbAccordionBody>
+                    <!-- append existing media and desc here and remove class d-none -->
+                    <div class="added-items d-none">
+                      <div class="row">
+                        <div class="col media">
+                          <figure>
+                            <!-- img or video goes here  -->
+                          </figure>
+                        </div>
+                        <div class="col description"></div>
+                      </div>
+                    </div>
+                    <ng-container
+                      *ngIf="getCropStageControl('seeding'); let groups"
+                    >
+                      <farm360-crop-staging-content
+                        *ngFor="let group of groups"
+                        [cropFormGroup]="group"
+                      ></farm360-crop-staging-content>
+                    </ng-container>
+
+                    <div class="row">
+                      <div class="col-md-6">
+                        <button
+                          type="button"
+                          class="btn btn-medium btn-more"
+                          (click)="addCropStage('seeding')"
+                        >
+                          <span>Add More</span>
+                          <img
+                            src="../../../assets/img/icon-add-circle-outline.svg"
+                            alt="more"
+                          />
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div ngbAccordionItem>
+                <h6 ngbAccordionHeader id="vegetativeStage">
+                  <button ngbAccordionButton type="button">
+                    Vegetative Stage
+                  </button>
+
+                  <span class="dd-arrow">
+                    <img src="../../../assets/img/dd-arrow.png" alt="open" />
+                  </span>
+                </h6>
+                <div id="collapseTwo" ngbAccordionCollapse>
+                  <div ngbAccordionBody>
+                    <!-- append existing media and desc here and remove class d-none -->
+                    <div class="added-items d-none">
+                      <div class="row">
+                        <div class="col media">
+                          <figure>
+                            <!-- img or video goes here  -->
+                          </figure>
+                        </div>
+                        <div class="col description"></div>
+                      </div>
+                    </div>
+                    <ng-container
+                      *ngIf="getCropStageControl('vegetative'); let groups"
+                    >
+                      <farm360-crop-staging-content
+                        *ngFor="let group of groups"
+                        [cropFormGroup]="group"
+                      ></farm360-crop-staging-content>
+                    </ng-container>
+
+                    <div class="row">
+                      <div class="col-md-6">
+                        <button
+                          type="button"
+                          class="btn btn-medium btn-more"
+                          (click)="addCropStage('vegetative')"
+                        >
+                          <span>Add More</span>
+                          <img
+                            src="../../../assets/img/icon-add-circle-outline.svg"
+                            alt="more"
+                          />
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div ngbAccordionItem>
+                <h6 ngbAccordionHeader id="floweringStage">
+                  <button ngbAccordionButton type="button">
+                    Flowering Stage
+                  </button>
+
+                  <span class="dd-arrow">
+                    <img src="../../../assets/img/dd-arrow.png" alt="open" />
+                  </span>
+                </h6>
+                <div id="collapseThree" ngbAccordionCollapse>
+                  <div ngbAccordionBody>
+                    <!-- append existing media and desc here and remove class d-none -->
+                    <div class="added-items d-none">
+                      <div class="row">
+                        <div class="col media">
+                          <figure>
+                            <!-- img or video goes here  -->
+                          </figure>
+                        </div>
+                        <div class="col description"></div>
+                      </div>
+                    </div>
+                    <ng-container
+                      *ngIf="getCropStageControl('flowering'); let groups"
+                    >
+                      <farm360-crop-staging-content
+                        *ngFor="let group of groups"
+                        [cropFormGroup]="group"
+                      ></farm360-crop-staging-content>
+                    </ng-container>
+
+                    <div class="row">
+                      <div class="col-md-6">
+                        <button
+                          type="button"
+                          class="btn btn-medium btn-more"
+                          (click)="addCropStage('flowering')"
+                        >
+                          <span>Add More</span>
+                          <img
+                            src="../../../assets/img/icon-add-circle-outline.svg"
+                            alt="more"
+                          />
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div ngbAccordionItem>
+                <h6 ngbAccordionHeader id="fruitingStage">
+                  <button type="button" ngbAccordionButton>
+                    Fruiting Stage
+                  </button>
+
+                  <span class="dd-arrow">
+                    <img src="../../../assets/img/dd-arrow.png" alt="open" />
+                  </span>
+                </h6>
+                <div id="collapseFour" ngbAccordionCollapse>
+                  <div ngbAccordionBody>
+                    <!-- append existing media and desc here and remove class d-none -->
+                    <div class="added-items d-none">
+                      <div class="row">
+                        <div class="col media">
+                          <figure>
+                            <!-- img or video goes here  -->
+                          </figure>
+                        </div>
+                        <div class="col description"></div>
+                      </div>
+                    </div>
+
+                    <ng-container
+                      *ngIf="getCropStageControl('fruiting'); let groups"
+                    >
+                      <farm360-crop-staging-content
+                        *ngFor="let group of groups"
+                        [cropFormGroup]="group"
+                      ></farm360-crop-staging-content>
+                    </ng-container>
+
+                    <div class="row">
+                      <div class="col-md-6">
+                        <button
+                          type="button"
+                          class="btn btn-medium btn-more"
+                          (click)="addCropStage('fruiting')"
+                        >
+                          <span>Add More</span>
+                          <img
+                            src="../../../assets/img/icon-add-circle-outline.svg"
+                            alt="more"
+                          />
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div ngbAccordionItem>
+                <h6 ngbAccordionHeader id="harvestingStage">
+                  <button type="button" ngbAccordionButton>
+                    Harvesting Stage
+                  </button>
+
+                  <span class="dd-arrow">
+                    <img src="../../../assets/img/dd-arrow.png" alt="open" />
+                  </span>
+                </h6>
+                <div id="collapseFive" ngbAccordionCollapse>
+                  <div ngbAccordionBody>
+                    <!-- append existing media and desc here and remove class d-none -->
+                    <div class="added-items d-none">
+                      <div class="row">
+                        <div class="col media">
+                          <figure>
+                            <!-- img or video goes here  -->
+                          </figure>
+                        </div>
+                        <div class="col description"></div>
+                      </div>
+                    </div>
+                    <ng-container
+                      *ngIf="getCropStageControl('harvest'); let groups"
+                    >
+                      <farm360-crop-staging-content
+                        *ngFor="let group of groups"
+                        [cropFormGroup]="group"
+                      ></farm360-crop-staging-content>
+                    </ng-container>
+
+                    <div class="row">
+                      <div class="col-md-6">
+                        <button
+                          type="button"
+                          class="btn btn-medium btn-more"
+                          (click)="addCropStage('harvest')"
+                        >
+                          <span>Add More</span>
+                          <img
+                            src="../../../assets/img/icon-add-circle-outline.svg"
+                            alt="more"
+                          />
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <farm360-crop-product-recommendation
+          title="Fertilizers"
+          [products]="fertilizers"
+          [productFormArray]="getProductControl('fertilizers')"
+        ></farm360-crop-product-recommendation>
+
+        <div class="form-spacer"></div>
+
+        <div class="row" [formGroup]="getFertilizerProvider()">
+          <div class="col">
+            <h6 class="h6 text-green-alt">Fertilizer Provider</h6>
+          </div>
+          <div class="w-100"></div>
+          <div class="col">
+            <div class="form-group">
+              <label for="fert_providerName">Name</label>
+              <input
+                type="text"
+                class="form-control"
+                name="fert_providerName"
+                id="fert_providerName"
+                formControlName="name"
+              />
+            </div>
+          </div>
+          <div class="col">
+            <div class="form-group">
+              <label for="fert_providerContact">Contact Number</label>
+              <input
+                type="text"
+                class="form-control"
+                name="fert_providerContact"
+                id="fert_providerContact"
+                formControlName="contactNumber"
+              />
+            </div>
+          </div>
+        </div>
+
+        <div class="form-spacer"></div>
+
+        <farm360-crop-product-recommendation
+          title="Seed Recommendations"
+          [products]="cropSeeds"
+          [productFormArray]="getProductControl('seeds')"
+        ></farm360-crop-product-recommendation>
+
+        <div class="form-spacer"></div>
+
+        <div class="row" [formGroup]="getSeedProvider()">
+          <div class="col">
+            <h6 class="h6 text-green-alt">Seed Provider</h6>
+          </div>
+          <div class="w-100"></div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="seed_providerName">Name</label>
+              <input
+                type="text"
+                class="form-control"
+                name="seed_providerName"
+                id="seed_providerName"
+                formControlName="name"
+              />
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="seed_providerContact">Contact Number</label>
+              <input
+                type="text"
+                class="form-control"
+                name="seed_providerContact"
+                id="seed_providerContact"
+                formControlName="contactNumber"
+              />
+            </div>
+          </div>
+        </div>
+
+        <div class="form-spacer"></div>
+
+        <div class="row">
+          <div class="col">
+            <h6 class="h6 text-green-alt mb-4">Pests and Diseases</h6>
+          </div>
+        </div>
+
+        <div class="wrapped-fields">
+          <farm360-crop-pest-diseases
+            *ngFor="let group of getPestDiseasesControls()"
+            [pestDiseasesFormGroup]="group"
+          >
+          </farm360-crop-pest-diseases>
+
+          <div class="row">
+            <div class="col-md-6">
+              <button
+                type="button"
+                class="btn btn-medium btn-more"
+                (click)="addPestDiseasesControl()"
+              >
+                <span>Add More</span>
+                <img
+                  src="../../../assets/img/icon-add-circle-outline.svg"
+                  alt="more"
+                />
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col d-flex">
+            <button class="ms-auto btn btn-form-action">Save</button>
+          </div>
+
+          <!-- <div class="col">
+              <div class="video-preview loading">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste
+                dicta cupiditate unde ratione, vero sed expedita molestias
+                incidunt aut officiis!
+              </div>
+              <div class="preloadwrap">
+                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ipsum
+                repudiandae quaerat vitae amet ab sapiente nulla expedita dolore
+                doloremque! At.
+              </div>
+            </div> -->
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
