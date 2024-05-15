@@ -8,12 +8,16 @@
   </div>
   <div class="title-right">
     <div class="search-form-wrap">
-      <form action="#" class="form search-form">
+      <form
+        class="form search-form"
+        [formGroup]="requestParam"
+        (ngSubmit)="getCropList()"
+      >
         <div class="form-group">
           <input
             type="text"
             class="form-control form-control-small"
-            placeholder="search"
+            formControlName="search"
           />
           <button type="submit" class="btn btn-searchsubmit">
             <img src="../../../assets/img/search.svg" alt="search" />
@@ -23,16 +27,20 @@
     </div>
 
     <div class="filter-form-wrap">
-      <form action="#" class="form form-inline">
-        <div class="form-group filter-title">Filter By</div>
-        <div class="form-group">
+      <form class="row g-1 align-items-center" [formGroup]="requestParam">
+        <div class="col">Sort By</div>
+        <div class="col">
           <select
-            name="filterby"
             id="filterby"
             class="form-control form-control-small"
+            formControlName="sort"
+            (change)="getCropList()"
           >
-            <option value="country">Country</option>
-            <option value="country">Name</option>
+            <option selected [ngValue]="null">Select</option>
+            <option value="name">Name &#8593;</option>
+            <option value="-name">Name &#8595;</option>
+            <option value="created_at">Created &#8593;</option>
+            <option value="-created_at">Created &#8595;</option>
           </select>
         </div>
       </form>

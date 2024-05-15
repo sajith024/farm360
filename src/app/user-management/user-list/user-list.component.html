@@ -1,16 +1,23 @@
 <div class="title-main">
   <div class="title-left">
     <h2>User Management</h2>
-    <h4>Total Number of Users: <span class="font-weight-bold">{{config.totalItems}}</span></h4>
+    <h4>
+      Total Number of Users:
+      <span class="font-weight-bold">{{ config.totalItems }}</span>
+    </h4>
   </div>
   <div class="title-right">
     <div class="search-form-wrap">
-      <form action="#" class="form search-form">
+      <form
+        class="form search-form"
+        [formGroup]="requestParam"
+        (ngSubmit)="getUsers()"
+      >
         <div class="form-group">
           <input
             type="text"
             class="form-control form-control-small"
-            placeholder="search"
+            formControlName="search"
           />
           <button type="submit" class="btn btn-searchsubmit">
             <img src="../../../assets/img/search.svg" alt="search" />
@@ -20,17 +27,28 @@
     </div>
 
     <div class="filter-form-wrap">
-      <div class="form form-inline">
-        <div class="form-group">
-          <button
-            class="btn btn-small btn-main"
-            data-bs-toggle="modal"
-            data-bs-target="#filterBy"
-          >
-            Filter By
-          </button>
+      <form
+        class="row g-1 align-items-center"
+        [formGroup]="requestParam"
+      >
+        <div class="col">Sort By</div>
+        <div class="col">
+          <select
+            id="filterby"
+            class="form-control form-control-small"
+            formControlName="sort"
+            (change)="getUsers()"
+          > 
+            <option selected [ngValue]="null">Select</option>
+            <option value="country">Country &#8593;</option>
+            <option value="-country">Country &#8595;</option>
+            <option value="name">Name &#8593;</option>
+            <option value="-name">Name &#8595;</option>
+            <option value="created">Created &#8593;</option>
+            <option value="-created">Created &#8595;</option>
+          </select>
         </div>
-      </div>
+      </form>
     </div>
 
     <div class="create-new-wrap">

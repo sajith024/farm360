@@ -4,3 +4,8 @@ export interface AppResponse<T> {
   message: string;
   statusCode: number;
 }
+
+export interface AppHttpParams {
+  search: string | null;
+  sort: string | null;
+}

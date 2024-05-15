@@ -1,12 +1,12 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from '../../../environments/environment.development';
-import { AppResponse } from '../../model/app-response';
+import { AppHttpParams, AppResponse } from '../../model/app-response';
 import {
   Profile,
-  ProfileForm,
   ProfileAdd,
+  ProfileForm,
 } from '../../model/dashboard/profile';
 import { AppPaginatedResponse } from '../../model/paginated-response';
 import { Country } from '../../model/user-management/country';
@@ -19,9 +19,21 @@ import { PhoneCode } from '../../model/user-management/phone-code';
 export class UserService {
   constructor(private httpClient: HttpClient) {}
 
-  getUsers(): Observable<AppPaginatedResponse<Profile>> {
+  getUsers(
+    paramValue: AppHttpParams
+  ): Observable<AppPaginatedResponse<Profile>> {
+    let params = new HttpParams();
+    params = paramValue.search
+      ? params.append('search', paramValue.search)
+      : params;
+    params = paramValue.sort
+      ? params.append('ordering', paramValue.sort)
+      : params;
     return this.httpClient.get<AppPaginatedResponse<Profile>>(
-      `${environment.apiUrl}/api/users/profile`
+      `${environment.apiUrl}/api/users/profile`,
+      {
+        params: params,
+      }
     );
   }
 

@@ -1,8 +1,8 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from '../../../environments/environment.development';
-import { AppResponse } from '../../model/app-response';
+import { AppHttpParams, AppResponse } from '../../model/app-response';
 import {
   Crop,
   CropDetail,
@@ -25,9 +25,21 @@ import { AppPaginatedResponse } from '../../model/paginated-response';
 export class CropManagementServiceService {
   constructor(private httpClient: HttpClient) {}
 
-  getCrops(): Observable<AppPaginatedResponse<CropInfo>> {
+  getCrops(
+    paramValue: AppHttpParams
+  ): Observable<AppPaginatedResponse<CropInfo>> {
+    let params = new HttpParams();
+    params = paramValue.search
+      ? params.append('search', paramValue.search)
+      : params;
+    params = paramValue.sort
+      ? params.append('ordering', paramValue.sort)
+      : params;
     return this.httpClient.get<AppPaginatedResponse<CropInfo>>(
-      `${environment.apiUrl}/api/crops/`
+      `${environment.apiUrl}/api/crops/`,
+      {
+        params: params,
+      }
     );
   }
 

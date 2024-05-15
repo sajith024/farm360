@@ -6,6 +6,8 @@ import { Profile } from '../../model/dashboard/profile';
 import { UserService } from '../../service/user-management/user.service';
 import { UserDeleteComponent } from '../user-delete/user-delete.component';
 import { UserInfoComponent } from '../user-info/user-info.component';
+import { AppHttpParams } from '../../model/app-response';
+import { FormControl, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'farm360-user-list',
@@ -20,6 +22,10 @@ export class UserListComponent implements OnInit {
   ) {}
 
   users: Profile[] = [];
+  requestParam: FormGroup = new FormGroup({
+    search: new FormControl(null),
+    sort: new FormControl(null),
+  });
 
   public config: PaginationInstance = {
     id: 'custom',
@@ -31,7 +37,11 @@ export class UserListComponent implements OnInit {
   totalPaginationPages: number = 0;
 
   ngOnInit(): void {
-    this.userService.getUsers().subscribe({
+    this.getUsers();
+  }
+
+  getUsers() {
+    this.userService.getUsers(this.requestParam.value).subscribe({
       next: (res) => {
         if (res.statusCode == 200 && res.success) {
           this.users = res.data.results;

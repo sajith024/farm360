@@ -5,6 +5,7 @@ import { ToastrService } from 'ngx-toastr';
 import { CropInfo } from '../../model/crop-management/crop-info';
 import { CropManagementServiceService } from '../../service/crop-management/crop-management-service.service';
 import { CropDeleteComponent } from '../crop-delete/crop-delete.component';
+import { FormGroup, FormControl } from '@angular/forms';
 
 @Component({
   selector: 'farm360-crop-list',
@@ -20,6 +21,11 @@ export class CropListComponent implements OnInit {
 
   crops: CropInfo[] = [];
 
+  requestParam: FormGroup = new FormGroup({
+    search: new FormControl(null),
+    sort: new FormControl(null),
+  });
+
   public config: PaginationInstance = {
     id: 'cropList',
     itemsPerPage: 0,
@@ -30,7 +36,11 @@ export class CropListComponent implements OnInit {
   totalPaginationPages: number = 0;
 
   ngOnInit(): void {
-    this.cropManagementService.getCrops().subscribe({
+    this.getCropList();
+  }
+
+  getCropList() {
+    this.cropManagementService.getCrops(this.requestParam.value).subscribe({
       next: (res) => {
         if (res.statusCode == 200 && res.success) {
           this.crops = res.data.results;
