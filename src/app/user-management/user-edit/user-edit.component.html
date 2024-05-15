@@ -22,7 +22,23 @@
             <div class="form-group fg-name">
               <label for="name">Name</label>
               <input type="text" class="form-control" formControlName="name" />
-              <!-- <span class="form-error">This field is required</span> -->
+              <span
+                *ngIf="
+                  userForm.get('name')?.touched &&
+                  userForm.get('name')?.hasError('required')
+                "
+                class="form-error"
+                >This field is required</span
+              >
+              <span
+                *ngIf="
+                  userForm.get('name')?.touched &&
+                  !userForm.get('name')?.hasError('required') &&
+                  userForm.get('name')?.hasError('name')
+                "
+                class="form-error"
+                >Enter Valid Name</span
+              >
             </div>
           </div>
 
@@ -59,6 +75,14 @@
                 <div class="photo-icon-wrap">
                   <img src="../../../assets/img/photo-icon.svg" alt="icon" />
                 </div>
+                <span
+                  *ngIf="
+                    userForm.get('image')?.touched &&
+                    userForm.get('image')?.hasError('required')
+                  "
+                  class="form-error"
+                  >Image is required</span
+                >
               </div>
             </div>
           </div>
@@ -77,6 +101,14 @@
                   {{ language.name }}
                 </option>
               </select>
+              <span
+                *ngIf="
+                  userForm.get('language')?.touched &&
+                  userForm.get('language')?.hasError('required')
+                "
+                class="form-error"
+                >This field is required</span
+              >
             </div>
           </div>
 
@@ -92,6 +124,14 @@
                   {{ country.name }}
                 </option>
               </select>
+              <span
+                *ngIf="
+                  userForm.get('country')?.touched &&
+                  userForm.get('country')?.hasError('required')
+                "
+                class="form-error"
+                >This field is required</span
+              >
             </div>
           </div>
         </div>
@@ -112,6 +152,23 @@
                   formControlName="phoneNumber"
                 />
               </div>
+              <span
+                *ngIf="
+                  userForm.get('phoneNumber')?.touched &&
+                  userForm.get('phoneNumber')?.hasError('required')
+                "
+                class="form-error"
+                >This field is required</span
+              >
+              <span
+                *ngIf="
+                  userForm.get('phoneNumber')?.touched &&
+                  !userForm.get('phoneNumber')?.hasError('required') &&
+                  userForm.get('phoneNumber')?.hasError('phone')
+                "
+                class="form-error"
+                >Enter valid phone number</span
+              >
             </div>
           </div>
 
@@ -123,6 +180,23 @@
                 class="form-control"
                 formControlName="email"
               />
+              <span
+                *ngIf="
+                  userForm.get('email')?.touched &&
+                  userForm.get('email')?.hasError('required')
+                "
+                class="form-error"
+                >This field is required</span
+              >
+              <span
+                *ngIf="
+                  userForm.get('email')?.touched &&
+                  !userForm.get('email')?.hasError('required') &&
+                  userForm.get('email')?.hasError('email')
+                "
+                class="form-error"
+                >Enter valid Email</span
+              >
             </div>
           </div>
         </div>
@@ -140,6 +214,14 @@
                 <img src="../../../assets/img/edit.svg" alt="edit" />
               </button>
             </div>
+            <span
+              *ngIf="
+                userForm.get('password')?.touched &&
+                userForm.get('password')?.hasError('password')
+              "
+              class="form-error"
+              >Enter valid password</span
+            >
           </div>
         </div>
 

@@ -1,11 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
+import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { Observable, combineLatest } from 'rxjs';
 import { AppResponse } from '../../model/app-response';
 import { CropStage, CropStageForm } from '../../model/crop-management/crop';
 import { Fertilizer, Seed } from '../../model/crop-management/crop-product';
 import { CropManagementServiceService } from '../../service/crop-management/crop-management-service.service';
+import { CropValidators } from '../../validators/crop-validators';
+import { UserValidators } from '../../validators/user-validators';
 
 @Component({
   selector: 'farm360-crop-create',
@@ -26,18 +28,38 @@ export class CropCreateComponent implements OnInit {
 
   ngOnInit(): void {
     this.cropForm = this.fb.group({
-      name: this.fb.control(''),
-      description: this.fb.control(''),
-      image: this.fb.control(null),
+      name: this.fb.control('', {
+        validators: [Validators.required, CropValidators.nameValidator],
+      }),
+      description: this.fb.control('', {
+        validators: [Validators.required, CropValidators.descriptionValidator],
+      }),
+      image: this.fb.control(null, {
+        validators: [Validators.required],
+      }),
       stages: this.fb.array<FormGroup>([]),
       fertilizers: this.fb.array<FormGroup>([]),
       fertilizerProvider: this.fb.group({
-        name: this.fb.control(''),
-        contactNumber: this.fb.control(''),
+        name: this.fb.control('', {
+          validators: [Validators.required, UserValidators.nameValidator],
+        }),
+        contactNumber: this.fb.control('', {
+          validators: [
+            Validators.required,
+            UserValidators.phoneNumberValidator,
+          ],
+        }),
       }),
       seedProvider: this.fb.group({
-        name: this.fb.control(''),
-        contactNumber: this.fb.control(''),
+        name: this.fb.control('', {
+          validators: [Validators.required, UserValidators.nameValidator],
+        }),
+        contactNumber: this.fb.control('', {
+          validators: [
+            Validators.required,
+            UserValidators.phoneNumberValidator,
+          ],
+        }),
       }),
       seeds: this.fb.array<FormGroup>([]),
       pestDiseases: this.fb.array<FormGroup>([
@@ -72,14 +94,14 @@ export class CropCreateComponent implements OnInit {
 
   addCropStage(name: string): void {
     const formArray = this.cropForm.get('stages') as FormArray | null;
-    formArray?.push(
-      this.fb.group({
-        stage: this.fb.control(name),
-        video: this.fb.control(null),
-        title: this.fb.control(''),
-        description: this.fb.control(''),
-      })
-    );
+    const formGroup = this.fb.group({
+      stage: this.fb.control(name),
+      video: this.fb.control(null),
+      title: this.fb.control(''),
+      description: this.fb.control(''),
+    });
+
+    formArray?.push(formGroup);
   }
 
   getCropStageControl(name: string): FormGroup[] {
@@ -103,8 +125,12 @@ export class CropCreateComponent implements OnInit {
 
   createPestDiseasesControl(): FormGroup {
     return this.fb.group({
-      insectDetails: this.fb.control(''),
-      symptoms: this.fb.control(''),
+      insectDetails: this.fb.control('', {
+        validators: [Validators.required, CropValidators.nameValidator],
+      }),
+      symptoms: this.fb.control('', {
+        validators: [Validators.required, CropValidators.descriptionValidator],
+      }),
       recommendedProducts: this.fb.array<FormGroup>([]),
       chemicalControl: this.fb.control(''),
       biologicalControl: this.fb.control(''),

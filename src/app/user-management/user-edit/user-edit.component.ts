@@ -1,5 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { ProfileAdd } from '../../model/dashboard/profile';
@@ -7,6 +12,8 @@ import { Country } from '../../model/user-management/country';
 import { Language } from '../../model/user-management/language';
 import { PhoneCode } from '../../model/user-management/phone-code';
 import { UserService } from '../../service/user-management/user.service';
+import { UserValidators } from '../../validators/user-validators';
+import { debounceTime, distinctUntilChanged } from 'rxjs';
 
 @Component({
   selector: 'farm360-user-edit',
@@ -30,13 +37,25 @@ export class UserEditComponent implements OnInit {
 
   ngOnInit(): void {
     this.userForm = this.fb.group({
-      name: new FormControl(''),
-      image: new FormControl(),
-      language: new FormControl(),
-      country: new FormControl(),
-      phoneCode: new FormControl(''),
-      phoneNumber: new FormControl(''),
-      email: new FormControl(''),
+      name: new FormControl('', {
+        validators: [Validators.required, UserValidators.nameValidator],
+      }),
+      image: new FormControl(null),
+      language: new FormControl(null, {
+        validators: [Validators.required],
+      }),
+      country: new FormControl(null, {
+        validators: [Validators.required],
+      }),
+      phoneCode: new FormControl('', {
+        validators: [Validators.required],
+      }),
+      phoneNumber: new FormControl('', {
+        validators: [Validators.required, UserValidators.phoneNumberValidator],
+      }),
+      email: new FormControl('', {
+        validators: [Validators.required, UserValidators.emailValidator],
+      }),
       password: new FormControl(''),
     });
 
@@ -67,6 +86,20 @@ export class UserEditComponent implements OnInit {
         this.toastr.error('Retrieving languages failed.');
       },
     });
+
+    this.userForm
+      .get('password')
+      ?.valueChanges.pipe(debounceTime(300))
+      .subscribe((value) => {
+        if (value) {
+          this.userForm
+            .get('password')
+            ?.setValidators(UserValidators.passwordValidator);
+        } else {
+          this.userForm.get('password')?.clearValidators();
+        }
+        this.userForm.get('password')?.updateValueAndValidity();
+      });
   }
 
   getUser(id: number): void {
@@ -124,6 +157,7 @@ export class UserEditComponent implements OnInit {
   }
 
   saveUser() {
+    this.userForm.markAllAsTouched();
     if (this.userForm.valid && this.user) {
       const id = this.user.id;
       this.userService.editUser(this.user, this.userForm.value).subscribe({

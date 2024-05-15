@@ -1,10 +1,16 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { Country } from '../../model/user-management/country';
 import { Language } from '../../model/user-management/language';
 import { PhoneCode } from '../../model/user-management/phone-code';
 import { UserService } from '../../service/user-management/user.service';
+import { UserValidators } from '../../validators/user-validators';
 
 @Component({
   selector: 'farm360-user-create',
@@ -24,17 +30,43 @@ export class UserCreateComponent implements OnInit {
   userImage: string | ArrayBuffer | null = null;
 
   ngOnInit(): void {
-    this.userForm = this.fb.group({
-      name: new FormControl(''),
-      image: new FormControl(),
-      language: new FormControl(),
-      country: new FormControl(),
-      phoneCode: new FormControl(''),
-      phoneNumber: new FormControl(''),
-      email: new FormControl(''),
-      password: new FormControl(''),
-      confirmpassword: new FormControl(''),
-    });
+    this.userForm = this.fb.group(
+      {
+        name: new FormControl('', {
+          validators: [Validators.required, UserValidators.nameValidator],
+        }),
+        image: new FormControl(null, {
+          validators: [Validators.required],
+        }),
+        language: new FormControl(null, {
+          validators: [Validators.required],
+        }),
+        country: new FormControl(null, {
+          validators: [Validators.required],
+        }),
+        phoneCode: new FormControl('', {
+          validators: [Validators.required],
+        }),
+        phoneNumber: new FormControl('', {
+          validators: [
+            Validators.required,
+            UserValidators.phoneNumberValidator,
+          ],
+        }),
+        email: new FormControl('', {
+          validators: [Validators.required, UserValidators.emailValidator],
+        }),
+        password: new FormControl('', {
+          validators: [Validators.required, UserValidators.passwordValidator],
+        }),
+        confirmpassword: new FormControl('', {
+          validators: [Validators.required, UserValidators.passwordValidator],
+        }),
+      },
+      {
+        validators: [UserValidators.passwordMatchValidator],
+      }
+    );
 
     this.userService.getCountries().subscribe({
       next: (res) => {
@@ -68,7 +100,6 @@ export class UserCreateComponent implements OnInit {
   onFileSelected(e: Event): void {
     if (e.target) {
       const target = e.target as HTMLInputElement;
-
       if (target.files) {
         const imageFile = target.files[0];
 
@@ -84,8 +115,8 @@ export class UserCreateComponent implements OnInit {
   }
 
   saveUser() {
+    this.userForm.markAllAsTouched();
     if (this.userForm.valid) {
-      console.log(this.userForm.value);
       this.userService.createUser(this.userForm.value).subscribe({
         next: (res) => {
           if (res.statusCode == 201 && res.success) {
