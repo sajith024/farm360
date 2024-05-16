@@ -29,6 +29,7 @@ export class UserService {
     params = paramValue.sort
       ? params.append('ordering', paramValue.sort)
       : params;
+    params = paramValue.page ? params.append('page', paramValue.page) : params;
     return this.httpClient.get<AppPaginatedResponse<Profile>>(
       `${environment.apiUrl}/api/users/profile`,
       {

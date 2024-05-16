@@ -110,6 +110,7 @@ export class UserCreateComponent implements OnInit {
 
         this.userForm.get('image')?.setValue(target.files[0]);
         fileReader.readAsDataURL(imageFile);
+        target.value = '';
       }
     }
   }

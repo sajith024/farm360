@@ -35,6 +35,7 @@ export class CropManagementServiceService {
     params = paramValue.sort
       ? params.append('ordering', paramValue.sort)
       : params;
+    params = paramValue.page ? params.append('page', paramValue.page) : params;
     return this.httpClient.get<AppPaginatedResponse<CropInfo>>(
       `${environment.apiUrl}/api/crops/`,
       {

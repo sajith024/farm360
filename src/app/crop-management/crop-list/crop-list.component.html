@@ -65,7 +65,7 @@
           <th scope="col" width="64">S. No</th>
           <th scope="col">Crop Name</th>
           <th scope="col" width="96">Image</th>
-          <th scope="col" width="480">Description</th>
+          <th scope="col" width="350">Description</th>
           <th scope="col">Created On</th>
           <th scope="col" id="actions" width="120"></th>
         </tr>
@@ -84,7 +84,7 @@
             />
           </td>
           <td>
-            <b>{{ crop.description }}</b>
+            <b>{{ crop.description | slice : 0 : 50 }}</b>
           </td>
           <td>{{ crop.created_at | date : "dd MMMM y" }}</td>
 
@@ -126,13 +126,13 @@
       <nav aria-label="page Navigation">
         <ul class="pagination">
           <li class="page-item" [class.disabled]="p.isFirstPage()">
-            <a class="page-link" title="first">
+            <a class="page-link" title="first" (click)="moveCurrentPage(p, 1)">
               <img src="../../../assets/img/arrow-left.svg" alt=" " />
               <img src="../../../assets/img/arrow-left.svg" alt=" " />
             </a>
           </li>
           <li class="page-item" [class.disabled]="p.isFirstPage()">
-            <a class="page-link" title="prev" (click)="p.previous()">
+            <a class="page-link" title="prev" (click)="previousPage(p)">
               <img src="../../../assets/img/arrow-left.svg" alt=" " />
             </a>
           </li>
@@ -143,7 +143,7 @@
             [class.active]="p.getCurrent() === page.value"
           >
             <a
-              (click)="p.setCurrent(page.value)"
+              (click)="moveCurrentPage(p, page.value)"
               class="page-link"
               *ngIf="p.getCurrent() !== page.value"
             >
@@ -155,12 +155,16 @@
           </li>
 
           <li class="page-item" [class.disabled]="p.isLastPage()">
-            <a class="page-link" title="next" (click)="p.next()">
+            <a class="page-link" title="next" (click)="nextPage(p)">
               <img src="../../../assets/img/arrow-right.svg" alt=" " />
             </a>
           </li>
           <li class="page-item" [class.disabled]="p.isLastPage()">
-            <a class="page-link" title="last">
+            <a
+              class="page-link"
+              title="last"
+              (click)="moveCurrentPage(p, p.getLastPage())"
+            >
               <img src="../../../assets/img/arrow-right.svg" alt=" " />
               <img src="../../../assets/img/arrow-right.svg" alt=" " />
             </a>

@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { PaginationInstance } from 'ngx-pagination';
+import {
+  PaginationControlsDirective,
+  PaginationInstance,
+} from 'ngx-pagination';
 import { ToastrService } from 'ngx-toastr';
 import { CropInfo } from '../../model/crop-management/crop-info';
 import { CropManagementServiceService } from '../../service/crop-management/crop-management-service.service';
@@ -24,6 +27,7 @@ export class CropListComponent implements OnInit {
   requestParam: FormGroup = new FormGroup({
     search: new FormControl(null),
     sort: new FormControl(null),
+    page: new FormControl('1'),
   });
 
   public config: PaginationInstance = {
@@ -64,5 +68,23 @@ export class CropListComponent implements OnInit {
     });
 
     modalRef.componentInstance.crop = crop;
+  }
+
+  moveCurrentPage(pagination: PaginationControlsDirective, page: number): void {
+    pagination.setCurrent(page);
+    this.requestParam.get('page')?.setValue(page);
+    this.getCropList();
+  }
+
+  previousPage(pagination: PaginationControlsDirective): void {
+    pagination.previous();
+    this.requestParam.get('page')?.setValue(this.config.currentPage);
+    this.getCropList();
+  }
+
+  nextPage(pagination: PaginationControlsDirective): void {
+    pagination.next();
+    this.requestParam.get('page')?.setValue(this.config.currentPage);
+    this.getCropList();
   }
 }

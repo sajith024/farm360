@@ -297,7 +297,15 @@ export class CropEditComponent {
               if (image) {
                 this.saveCropImage(res.data.id!, image);
               }
-              this.saveCropStage(res.data.id!, this.cropForm.value.stages);
+
+              const stages = this.cropForm.value.stages;
+              if (stages.length !== 0) {
+                this.saveCropStage(res.data.id!, stages);
+              } else {
+                this.cropForm.reset();
+                this.getCrop(res.data.id!);
+                this.cropImage = null;
+              }
             }
           },
           error: (err) => {
@@ -318,7 +326,7 @@ export class CropEditComponent {
         );
       } else {
         cropStagesObservables$.push(
-          this.cropManagementService.updateCropStage(stage.id!, cropId, stage)
+          this.cropManagementService.updateCropStage(stage.id, cropId, stage)
         );
       }
     });
@@ -327,6 +335,8 @@ export class CropEditComponent {
       next: () => {
         this.toastr.success('Crop Stage edited successfully');
         this.cropForm.reset();
+        this.getCrop(cropId);
+        this.cropImage = null;
       },
       error: (err) => {
         console.error(err);

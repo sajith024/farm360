@@ -24,7 +24,7 @@ export class CropValidators {
   }
 
   static descriptionValidator(value: AbstractControl) {
-    const descriptionPattern = /^[a-zA-Z][a-zA-Z0-9.,!?\-;:()\'\"\s]{10,999}$/;
+    const descriptionPattern = /^[a-zA-Z][a-zA-Z0-9.,!?\-;:()'"\s]{10,999}$/;
     if (!descriptionPattern.test(value.value)) {
       return {
         description: true,
@@ -32,5 +32,21 @@ export class CropValidators {
     }
 
     return null;
+  }
+
+  static optionalTitleValidator(value: AbstractControl) {
+    if (!value.value) {
+      return null;
+    }
+
+    return CropValidators.titleValidator(value);
+  }
+
+  static optionalDescriptionValidator(value: AbstractControl) {
+    if (!value.value) {
+      return null;
+    }
+
+    return CropValidators.descriptionValidator(value);
   }
 }

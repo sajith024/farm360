@@ -8,4 +8,5 @@ export interface AppResponse<T> {
 export interface AppHttpParams {
   search: string | null;
   sort: string | null;
+  page: string;
 }

@@ -38,7 +38,9 @@ export class CropCreateComponent implements OnInit {
         validators: [Validators.required],
       }),
       stages: this.fb.array<FormGroup>([]),
-      fertilizers: this.fb.array<FormGroup>([]),
+      fertilizers: this.fb.array<FormGroup>([], {
+        validators: [Validators.required],
+      }),
       fertilizerProvider: this.fb.group({
         name: this.fb.control('', {
           validators: [Validators.required, UserValidators.nameValidator],
@@ -61,7 +63,9 @@ export class CropCreateComponent implements OnInit {
           ],
         }),
       }),
-      seeds: this.fb.array<FormGroup>([]),
+      seeds: this.fb.array<FormGroup>([], {
+        validators: [Validators.required],
+      }),
       pestDiseases: this.fb.array<FormGroup>([
         this.createPestDiseasesControl(),
       ]),
@@ -97,8 +101,12 @@ export class CropCreateComponent implements OnInit {
     const formGroup = this.fb.group({
       stage: this.fb.control(name),
       video: this.fb.control(null),
-      title: this.fb.control(''),
-      description: this.fb.control(''),
+      title: this.fb.control('', {
+        validators: [CropValidators.optionalTitleValidator],
+      }),
+      description: this.fb.control('', {
+        validators: [CropValidators.optionalDescriptionValidator],
+      }),
     });
 
     formArray?.push(formGroup);
@@ -131,9 +139,15 @@ export class CropCreateComponent implements OnInit {
       symptoms: this.fb.control('', {
         validators: [Validators.required, CropValidators.descriptionValidator],
       }),
-      recommendedProducts: this.fb.array<FormGroup>([]),
-      chemicalControl: this.fb.control(''),
-      biologicalControl: this.fb.control(''),
+      recommendedProducts: this.fb.array<FormGroup>([], {
+        validators: [Validators.required],
+      }),
+      chemicalControl: this.fb.control('', {
+        validators: [CropValidators.optionalDescriptionValidator],
+      }),
+      biologicalControl: this.fb.control('', {
+        validators: [CropValidators.optionalDescriptionValidator],
+      }),
     });
   }
 
@@ -166,6 +180,7 @@ export class CropCreateComponent implements OnInit {
   }
 
   saveCrop(): void {
+    this.cropForm.markAllAsTouched();
     if (this.cropForm.valid) {
       this.cropManagementService.createCrop(this.cropForm.value).subscribe({
         next: (res) => {

@@ -27,10 +27,7 @@
     </div>
 
     <div class="filter-form-wrap">
-      <form
-        class="row g-1 align-items-center"
-        [formGroup]="requestParam"
-      >
+      <form class="row g-1 align-items-center" [formGroup]="requestParam">
         <div class="col">Sort By</div>
         <div class="col">
           <select
@@ -38,7 +35,7 @@
             class="form-control form-control-small"
             formControlName="sort"
             (change)="getUsers()"
-          > 
+          >
             <option selected [ngValue]="null">Select</option>
             <option value="country">Country &#8593;</option>
             <option value="-country">Country &#8595;</option>
@@ -126,13 +123,13 @@
       <nav aria-label="page Navigation">
         <ul class="pagination">
           <li class="page-item" [class.disabled]="p.isFirstPage()">
-            <a class="page-link" title="first">
+            <a class="page-link" title="first" (click)="moveCurrentPage(p, 1)">
               <img src="../../../assets/img/arrow-left.svg" alt=" " />
               <img src="../../../assets/img/arrow-left.svg" alt=" " />
             </a>
           </li>
           <li class="page-item" [class.disabled]="p.isFirstPage()">
-            <a class="page-link" title="prev" (click)="p.previous()">
+            <a class="page-link" title="prev" (click)="previousPage(p)">
               <img src="../../../assets/img/arrow-left.svg" alt=" " />
             </a>
           </li>
@@ -143,7 +140,7 @@
             [class.active]="p.getCurrent() === page.value"
           >
             <a
-              (click)="p.setCurrent(page.value)"
+              (click)="moveCurrentPage(p, page.value)"
               class="page-link"
               *ngIf="p.getCurrent() !== page.value"
             >
@@ -155,12 +152,12 @@
           </li>
 
           <li class="page-item" [class.disabled]="p.isLastPage()">
-            <a class="page-link" title="next" (click)="p.next()">
+            <a class="page-link" title="next" (click)="nextPage(p)">
               <img src="../../../assets/img/arrow-right.svg" alt=" " />
             </a>
           </li>
           <li class="page-item" [class.disabled]="p.isLastPage()">
-            <a class="page-link" title="last">
+            <a class="page-link" title="last" (click)="moveCurrentPage(p, p.getLastPage())">
               <img src="../../../assets/img/arrow-right.svg" alt=" " />
               <img src="../../../assets/img/arrow-right.svg" alt=" " />
             </a>

@@ -1,69 +1,127 @@
-<div class="wrapped-fields-inputs" [formGroup]="pestDiseasesFormGroup">
-  <div class="row">
-    <div class="col-md-6">
-      <div class="form-group">
-        <label for="insectDetails">Insect Details</label>
-        <input
-          type="text"
-          class="form-control"
-          name="insectDetails"
-          id="insectDetails"
-          formControlName="insectDetails"
-        />
+<div class="wrapped-fields">
+  <div class="wrapped-fields-inputs" [formGroup]="pestDiseasesFormGroup">
+    <div class="row">
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="insectDetails">Insect Details</label>
+          <input
+            type="text"
+            class="form-control"
+            name="insectDetails"
+            id="insectDetails"
+            formControlName="insectDetails"
+          />
+          <span
+            *ngIf="
+              pestDiseasesFormGroup.get('insectDetails')?.touched &&
+              pestDiseasesFormGroup.get('insectDetails')?.hasError('required')
+            "
+            class="form-error"
+            >This field is required</span
+          >
+          <span
+            *ngIf="
+              pestDiseasesFormGroup.get('insectDetails')?.touched &&
+              !pestDiseasesFormGroup
+                .get('insectDetails')
+                ?.hasError('required') &&
+              pestDiseasesFormGroup.get('insectDetails')?.hasError('name')
+            "
+            class="form-error"
+            >Enter Valid Name</span
+          >
+        </div>
       </div>
     </div>
-  </div>
-  <div class="row">
-    <div class="col">
-      <div class="form-group">
-        <label for="symptoms">Symptoms</label>
-        <textarea
-          name="symptoms"
-          id="symptoms"
-          cols="30"
-          rows="5"
-          class="form-control"
-          formControlName="symptoms"
-        ></textarea>
+    <div class="row">
+      <div class="col">
+        <div class="form-group">
+          <label for="symptoms">Symptoms</label>
+          <textarea
+            name="symptoms"
+            id="symptoms"
+            cols="30"
+            rows="5"
+            class="form-control"
+            formControlName="symptoms"
+          ></textarea>
+          <span
+            *ngIf="
+              pestDiseasesFormGroup.get('symptoms')?.touched &&
+              pestDiseasesFormGroup.get('symptoms')?.hasError('required')
+            "
+            class="form-error"
+            >This field is required</span
+          >
+          <span
+            *ngIf="
+              pestDiseasesFormGroup.get('symptoms')?.touched &&
+              !pestDiseasesFormGroup.get('symptoms')?.hasError('required') &&
+              pestDiseasesFormGroup.get('symptoms')?.hasError('description')
+            "
+            class="form-error"
+            >Enter Valid symptoms</span
+          >
+        </div>
       </div>
     </div>
-  </div>
 
-  <farm360-crop-product-recommendation
-    title="Recommended Product"
-    [products]="pesticides"
-    [productFormArray]="getProductControl()"
-  >
-  </farm360-crop-product-recommendation>
+    <farm360-crop-product-recommendation
+      title="Recommended Product"
+      [products]="pesticides"
+      [productFormArray]="getProductControl()"
+    >
+    </farm360-crop-product-recommendation>
 
-  <div class="row">
-    <div class="col">
-      <div class="form-group">
-        <label for="chemicalControl">Chemical Control</label>
-        <textarea
-          name="chemicalControl"
-          id="chemicalControl"
-          cols="30"
-          rows="5"
-          class="form-control"
-          formControlName="chemicalControl"
-        ></textarea>
+    <div class="row">
+      <div class="col">
+        <div class="form-group">
+          <label for="chemicalControl">Chemical Control</label>
+          <textarea
+            name="chemicalControl"
+            id="chemicalControl"
+            cols="30"
+            rows="5"
+            class="form-control"
+            formControlName="chemicalControl"
+          ></textarea>
+          <span
+            *ngIf="
+              pestDiseasesFormGroup.get('chemicalControl')?.touched &&
+              pestDiseasesFormGroup
+                .get('chemicalControl')
+                ?.hasError('description')
+            "
+            class="form-error"
+            >Enter Valid description</span
+          >
+        </div>
       </div>
     </div>
-  </div>
 
-  <div class="row">
-    <div class="col">
-      <div class="form-group">
-        <label for="biologicalControl">Biological Control</label>
-        <textarea
-          name="biologicalControl"
-          id="biologicalControl"
-          cols="30"
-          rows="5"
-          class="form-control"
-          formControlName="biologicalControl"
-        ></textarea>
+    <div class="row">
+      <div class="col">
+        <div class="form-group">
+          <label for="biologicalControl">Biological Control</label>
+          <textarea
+            name="biologicalControl"
+            id="biologicalControl"
+            cols="30"
+            rows="5"
+            class="form-control"
+            formControlName="biologicalControl"
+          ></textarea>
+          <span
+            *ngIf="
+              pestDiseasesFormGroup.get('biologicalControl')?.touched &&
+              pestDiseasesFormGroup
+                .get('biologicalControl')
+                ?.hasError('description')
+            "
+            class="form-error"
+            >Enter Valid description</span
+          >
+        </div>
       </div>
     </div>
   </div>

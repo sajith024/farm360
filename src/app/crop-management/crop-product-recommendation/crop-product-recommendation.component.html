@@ -15,6 +15,13 @@
         (selectItem)="addSelected($event)"
         (keydown.enter)="clearInput(productInput)"
       />
+      <span
+        *ngIf="
+          productFormArray.touched && productFormArray.hasError('required')
+        "
+        class="form-error"
+        >This field is required</span
+      >
     </div>
   </div>
   <div class="w-100"></div>

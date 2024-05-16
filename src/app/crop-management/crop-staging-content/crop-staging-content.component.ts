@@ -8,7 +8,7 @@ import { FormGroup } from '@angular/forms';
 })
 export class CropStagingContentComponent {
   @Input()
-  cropFormGroup!: FormGroup;
+  cropStagingFormGroup!: FormGroup;
   infoType: string = '0';
 
   cropVideo: string | ArrayBuffer | null = null;
@@ -24,7 +24,7 @@ export class CropStagingContentComponent {
         };
 
         fileReader.readAsArrayBuffer(target.files[0]);
-        this.cropFormGroup.get('video')?.setValue(target.files[0]);
+        this.cropStagingFormGroup.get('video')?.setValue(target.files[0]);
       }
     }
   }

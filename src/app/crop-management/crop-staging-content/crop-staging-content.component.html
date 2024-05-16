@@ -1,4 +1,4 @@
-<div class="crop-info-form" [formGroup]="cropFormGroup">
+<div class="crop-info-form" [formGroup]="cropStagingFormGroup">
   <div class="wrapped-field-inputs">
     <div class="row">
       <div class="col">
@@ -34,6 +34,14 @@
               id="crop_title"
               formControlName="title"
             />
+            <span
+              *ngIf="
+                cropStagingFormGroup.get('title')?.touched &&
+                cropStagingFormGroup.get('title')?.hasError('title')
+              "
+              class="form-error"
+              >Enter Valid description</span
+            >
           </div>
           <div class="form-group">
             <label for="comment-input" class="crop-info-label"
@@ -46,6 +54,14 @@
               class="form-control"
               formControlName="description"
             ></textarea>
+            <span
+              *ngIf="
+                cropStagingFormGroup.get('description')?.touched &&
+                cropStagingFormGroup.get('description')?.hasError('description')
+              "
+              class="form-error"
+              >Enter Valid description</span
+            >
           </div>
         </ng-container>
       </div>
