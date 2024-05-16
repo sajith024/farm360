@@ -26,6 +26,13 @@ const routes: Routes = [
             (m) => m.CropManagementModule
           ),
       },
+      {
+        path: 'community',
+        loadChildren: () =>
+          import('../community-management/community-management.module').then(
+            (m) => m.CommunityManagementModule
+          ),
+      },
     ],
   },
 ];

@@ -6,6 +6,7 @@ import { AppPageComponent } from './app-page.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { AppHeaderComponent } from './app-header/app-header.component';
 import { NgbDropdownModule, NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
+import { CommunityManagementModule } from '../community-management/community-management.module';
 
 
 @NgModule({
@@ -18,7 +19,8 @@ import { NgbDropdownModule, NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
     CommonModule,
     NgbDropdownModule,
     NgbModalModule,
-    AppPageRoutingModule
+    AppPageRoutingModule,
+    CommunityManagementModule
   ]
 })
 export class AppPageModule { }

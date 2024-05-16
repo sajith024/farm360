@@ -32,7 +32,7 @@ export class CropListComponent implements OnInit {
 
   public config: PaginationInstance = {
     id: 'cropList',
-    itemsPerPage: 0,
+    itemsPerPage: 10,
     currentPage: 1,
     totalItems: 1,
   };
@@ -48,7 +48,6 @@ export class CropListComponent implements OnInit {
       next: (res) => {
         if (res.statusCode == 200 && res.success) {
           this.crops = res.data.results;
-          this.config.itemsPerPage = res.data.results.length;
           this.config.currentPage = res.data.pagination.page;
           this.config.totalItems = res.data.pagination.count;
           this.totalPaginationPages = res.data.pagination.total_pages;

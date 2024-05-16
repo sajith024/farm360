@@ -1,0 +1,108 @@
+<div class="title-main">
+  <div class="title-left">
+    <h2>
+      <button class="btn btn-back" id="button-back" routerLink="/community">
+        <img src="../../../assets/img/icon-arrow-back.svg" alt="back" />
+      </button>
+      Detailed Info
+    </h2>
+  </div>
+</div>
+
+<div class="content-area">
+  <div class="container-fluid">
+    <div class="row align-items-center detail-userinfo">
+      <div class="col col-detailed-img">
+        <div class="detailed-userimg">
+          <img [src]="communityQuery.profile_image" alt="user" />
+        </div>
+      </div>
+      <div class="col col-detailed-info">
+        <p class="detailed-username">
+          {{ communityQuery.first_name + " " + communityQuery.last_name }}
+        </p>
+        <p class="detailed-location">
+          <img src="../../../assets/img/icon-location-on.svg" alt="loc" />
+          {{ communityQuery.country }}
+        </p>
+        <p class="detailed-time">{{ communityQuery.created_at | timeAgo }}</p>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col detailed-images">
+        <ngb-carousel [keyboard]="false">
+          <ng-template ngbSlide *ngFor="let image of communityQuery.images">
+            <img [src]="image" alt="crop" />
+          </ng-template>
+        </ngb-carousel>
+      </div>
+      <div class="col detailed-queries">
+        <h4 class="query-subtitles">
+          Asked a
+          {{ communityQuery.query_type === "query" ? "Query" : "Suggestion" }}.
+        </h4>
+        <h3 class="query-subtitle">{{ communityQuery.title }}</h3>
+
+        <div class="query-content">
+          <p>
+            {{ communityQuery.description }}
+          </p>
+
+          <a routerLink="/community/replies/1" class="link-primary"
+            >User Replies ({{ communityQuery.replies }})</a
+          >
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <farm360-admin-reply></farm360-admin-reply>
+
+  <div class="container-fluid">
+    <form action="#" class="form dashboard-form detail-info-form">
+      <div class="row">
+        <div class="col">
+          <div class="image-preview"></div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <div class="form-group">
+            <label for="comment-file" class="font-weight-normal">File</label>
+            <div class="form-control comment-file-trigger">
+              <img src="../../../assets/img/icon-upload.svg" alt="upload" />
+              <span
+                >Drop a file to add, or
+                <span class="text-primary">Choose File</span>
+              </span>
+            </div>
+            <input type="file" id="comment-file" class="d-none" />
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col">
+          <div class="form-group">
+            <label for="comment-input" class="font-weight-normal"
+              >Write a Comment</label
+            >
+            <textarea
+              name="comment-input"
+              id="comment-input"
+              rows="8"
+              class="form-control"
+            ></textarea>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col d-flex">
+          <button class="ml-auto btn btn-form-action">Send</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
