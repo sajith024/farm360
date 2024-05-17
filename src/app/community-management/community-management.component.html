@@ -65,7 +65,7 @@
           <th scope="col">Date</th>
           <th scope="col">User Name</th>
           <th scope="col">Type</th>
-          <th scope="col" width="400">Description</th>
+          <th scope="col" width="400">Title</th>
           <th scope="col">Location</th>
           <th scope="col" id="replied" width="125"></th>
           <th scope="col" id="actions" width="120"></th>
@@ -81,12 +81,14 @@
         >
           <td scope="row">#{{ i + 1 }}</td>
           <td>{{ query.created_at | date : "dd MMMM y" }}</td>
-          <td>{{ query.first_name + query.last_name }}</td>
+          <td>
+            {{ query.created_by.first_name + " " + query.created_by.last_name }}
+          </td>
           <td>{{ query.query_type === "query" ? "Query" : "Suggestion" }}</td>
           <td>
-            <b>{{ query.description | slice : 0 : 50 }}</b>
+            <b>{{ query.title | slice : 0 : 50 }}</b>
           </td>
-          <td>{{ query.country }}</td>
+          <td>{{ query.created_by.country }}</td>
           <td>
             <button
               *ngIf="query.replies !== 0"
@@ -102,18 +104,22 @@
               aria-label="action buttons"
             >
               <button
-                routerLink="detail"
+                [routerLink]="['detail', query.id]"
                 type="button"
                 class="btn"
                 id="edit"
-                (click)="sendQuery(query)"
               >
                 <img
                   src="../../assets/img/icon-awesome-eye-green.svg"
                   alt="edit"
                 />
               </button>
-              <button type="button" class="btn" id="edit">
+              <button
+                type="button"
+                class="btn"
+                id="edit"
+                (click)="deleteQuery(query)"
+              >
                 <img src="../../assets/img/delete.svg" alt="delete" />
               </button>
             </div>

@@ -9,21 +9,25 @@
   </div>
 </div>
 
-<div class="content-area">
+<div *ngIf="communityQuery" class="content-area">
   <div class="container-fluid">
     <div class="row align-items-center detail-userinfo">
       <div class="col col-detailed-img">
         <div class="detailed-userimg">
-          <img [src]="communityQuery.profile_image" alt="user" />
+          <img [src]="communityQuery.created_by.image" alt="user" />
         </div>
       </div>
       <div class="col col-detailed-info">
         <p class="detailed-username">
-          {{ communityQuery.first_name + " " + communityQuery.last_name }}
+          {{
+            communityQuery.created_by.first_name +
+              " " +
+              communityQuery.created_by.last_name
+          }}
         </p>
         <p class="detailed-location">
           <img src="../../../assets/img/icon-location-on.svg" alt="loc" />
-          {{ communityQuery.country }}
+          {{ communityQuery.created_by.country }}
         </p>
         <p class="detailed-time">{{ communityQuery.created_at | timeAgo }}</p>
       </div>
@@ -49,7 +53,10 @@
             {{ communityQuery.description }}
           </p>
 
-          <a routerLink="/community/replies/1" class="link-primary"
+          <a
+            *ngIf="communityQuery.replies !== 0"
+            [routerLink]="['/community', 'replies', communityQuery.id]"
+            class="link-primary"
             >User Replies ({{ communityQuery.replies }})</a
           >
         </div>
@@ -57,10 +64,15 @@
     </div>
   </div>
 
-  <farm360-admin-reply></farm360-admin-reply>
+  <ng-container>
+    <farm360-admin-reply
+      *ngIf="getAdminComments(); let comments"
+      [comments]="comments"
+    ></farm360-admin-reply>
+  </ng-container>
 
   <div class="container-fluid">
-    <form action="#" class="form dashboard-form detail-info-form">
+    <form action="#" class="form dashboard-form detail-info-form" [formGroup]="commentForm" (ngSubmit)="save()">
       <div class="row">
         <div class="col">
           <div class="image-preview"></div>
@@ -93,6 +105,7 @@
               id="comment-input"
               rows="8"
               class="form-control"
+              formControlName="comment"
             ></textarea>
           </div>
         </div>

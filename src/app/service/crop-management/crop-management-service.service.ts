@@ -2,7 +2,11 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from '../../../environments/environment.development';
-import { AppHttpParams, AppResponse } from '../../model/app-response';
+import {
+  AppHttpParams,
+  AppPaginatedResponse,
+  AppResponse,
+} from '../../model/app-response';
 import {
   Crop,
   CropDetail,
@@ -17,7 +21,6 @@ import {
   Pesticide,
   Seed,
 } from '../../model/crop-management/crop-product';
-import { AppPaginatedResponse } from '../../model/paginated-response';
 
 @Injectable({
   providedIn: 'root',

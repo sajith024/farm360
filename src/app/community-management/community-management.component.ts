@@ -1,11 +1,12 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import {
   PaginationControlsDirective,
   PaginationInstance,
 } from 'ngx-pagination';
 import { ToastrService } from 'ngx-toastr';
-import { Subscription } from 'rxjs';
+import { DeleteConfirmComponent } from '../app-component-utils/delete-confirm/delete-confirm.component';
 import { CommunityQueryDetail } from '../model/community-management/community-query';
 import { CommunityManagementService } from '../service/community-management/community-management.service';
 
@@ -17,6 +18,7 @@ import { CommunityManagementService } from '../service/community-management/comm
 export class CommunityManagementComponent implements OnInit {
   constructor(
     private toastr: ToastrService,
+    private modalService: NgbModal,
     private communityManagementService: CommunityManagementService
   ) {}
 
@@ -60,7 +62,28 @@ export class CommunityManagementComponent implements OnInit {
       });
   }
 
-  sendQuery(query: CommunityQueryDetail): void {}
+  deleteQuery(query: CommunityQueryDetail): void {
+    const modalRef = this.modalService.open(DeleteConfirmComponent, {
+      centered: true,
+      size: 'lg',
+    });
+    modalRef.componentInstance.content = query.title;
+
+    modalRef.result.then((result) => {
+      if (result) {
+        this.communityManagementService.deleteQuery(query.id).subscribe({
+          next: () => {
+            this.getQueries();
+            this.toastr.success('Query deleted successfully');
+          },
+          error: (err) => {
+            console.error(err);
+            this.toastr.error('Query delete failed');
+          },
+        });
+      }
+    });
+  }
 
   moveCurrentPage(pagination: PaginationControlsDirective, page: number): void {
     pagination.setCurrent(page);

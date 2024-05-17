@@ -2,13 +2,16 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from '../../../environments/environment.development';
-import { AppHttpParams, AppResponse } from '../../model/app-response';
+import {
+  AppHttpParams,
+  AppPaginatedResponse,
+  AppResponse,
+} from '../../model/app-response';
 import {
   Profile,
   ProfileAdd,
   ProfileForm,
 } from '../../model/dashboard/profile';
-import { AppPaginatedResponse } from '../../model/paginated-response';
 import { Country } from '../../model/user-management/country';
 import { Language } from '../../model/user-management/language';
 import { PhoneCode } from '../../model/user-management/phone-code';

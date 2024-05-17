@@ -6,8 +6,8 @@ import { CommunityManagementComponent } from './community-management.component';
 
 const routes: Routes = [
   { path: '', component: CommunityManagementComponent },
-  { path: 'detail', component: QueryDetailComponent },
-  { path: 'replies', component: UserReplyComponent },
+  { path: 'detail/:id', component: QueryDetailComponent },
+  { path: 'replies/:id', component: UserReplyComponent },
 ];
 
 @NgModule({

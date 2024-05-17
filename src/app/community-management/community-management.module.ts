@@ -8,8 +8,8 @@ import { AdminReplyComponent } from './admin-reply/admin-reply.component';
 import { CommunityManagementRoutingModule } from './community-management-routing.module';
 import { CommunityManagementComponent } from './community-management.component';
 import { QueryDetailComponent } from './query-detail/query-detail.component';
-import { UserReplyComponent } from './user-reply/user-reply.component';
 import { TimeAgoPipe } from './time-ago.pipe';
+import { UserReplyComponent } from './user-reply/user-reply.component';
 
 @NgModule({
   declarations: [

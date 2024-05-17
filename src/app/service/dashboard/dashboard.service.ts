@@ -19,7 +19,7 @@ export class DashboardService {
   getUserProfile(): Observable<AppResponse<Profile>> {
     const userId = this.localStorage.getItem('userId');
     return this.httpClient
-      .get<AppResponse<Profile>>(`${environment.apiUrl}/api/users/${userId}/`)
+      .get<AppResponse<Profile>>(`${environment.apiUrl}/api/users/profile/${userId}/`)
       .pipe(
         tap((res) => {
           if (res.statusCode === 200 && res.success) {
